@@ -1,5 +1,6 @@
 import { cust_style,ad_img,button_handler, add_text, Hybrid,HybridPlot } from "./Utility.js";
 
+
 let fontsi = 20;
 
 function Personalien([x,y,width]){
@@ -8,7 +9,8 @@ function Personalien([x,y,width]){
     let field = new PIXI.Graphics();
     let space = 400;
     field.x = x;
-    field.y = y;
+    field.y = y;68
+    
 
     let per_param = ["static/Images/bewerbungsfoto.png",0,0,200,200];
     let picture = ad_img(per_param);
@@ -50,32 +52,37 @@ function Education([x,y,width]){
     field.x = x;
     field.y = y;
 
+
     let time_uzh = add_text("2022 - 2025",0,0,false,width,'Verdana',fontsi);
     let uzh = add_text("Bsc Mathematics / Computer Science (120/60)",space,time_uzh.y,false,1000,'Verdana',fontsi);
     let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+3,false,1000,'Verdana',fontsi);
 
-    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+10,false,width,'Verdana',fontsi);
-    let eth = add_text("Bsc Mathematics",space,time_eth.y,false,1000,'Verdana',fontsi);
-    let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,false,1000,'Verdana',fontsi);
 
-    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+10,false,width,'Verdana',fontsi);
-    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,false,1000,'Verdana',fontsi);
-    let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,false,1000,'Verdana',fontsi);
+    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+10,true,width,'Verdana',fontsi);
+    let eth = add_text("Bsc Mathematics",space,time_eth.y,true,1000,'Verdana',fontsi);
+    let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,true,1000,'Verdana',fontsi);   
+
+    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+10,true,width,'Verdana',fontsi);
+    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,true,1000,'Verdana',fontsi);
+    let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,true,1000,'Verdana',fontsi);
    
-    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+10,false,width,'Verdana',fontsi);
-    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,false,1000,'Verdana',fontsi);
-    let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,false,1000,'Verdana',fontsi);
+    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+10,true,width,'Verdana',fontsi);
+    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,true,1000,'Verdana',fontsi);
+    let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,true,1000,'Verdana',fontsi);
 
-    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+10,false,width,'Verdana',fontsi);
-    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,false,1000,'Verdana',fontsi);
-    let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,false,1000,'Verdana',fontsi);
+    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+10,true,width,'Verdana',fontsi);
+    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,true,1000,'Verdana',fontsi);
+    let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,true,1000,'Verdana',fontsi);
 
-    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+10,false,width,'Verdana',fontsi);
-    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,false,1000,'Verdana',fontsi);
-    let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,false,1000,'Verdana',fontsi);
+    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+10,true,width,'Verdana',fontsi);
+    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,true,1000,'Verdana',fontsi);
+    let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,true,1000,'Verdana',fontsi);
 
+    let attach_con_eth2 = new PIXI.Container();
 
-    field.addChild(time_uzh,uzh,uzh2,time_eth,eth,eth2,time_eth3,eth3,eth4,time_pass,pass,pass2,time_bm,bm,bm2,time_kv,kv,kv2);
+    field.addChild(time_uzh,uzh,uzh2,time_eth,eth,eth2,attach_con_eth2,time_eth3,eth3,eth4,time_pass,pass,pass2,time_bm,bm,bm2,time_kv,kv,kv2);
+    
+    
     return field;
 }
 
@@ -434,7 +441,7 @@ async function show_CV([app,width,x,y]){
     let per_param = [x,y+spac,200];
 
     async function button_pers_fo() {
-        box = await button_handler(app,3,box,Personalien,per_param,con_pers,null,null,null); 
+        box = await button_handler(app,3,box,Personalien,per_param,con_pers,null); 
     };
 
     button_pers.on('pointerup',button_pers_fo);
@@ -443,7 +450,7 @@ async function show_CV([app,width,x,y]){
     let param = [x,button_edu.height+spac,200];
 
     async function button_edu_fo(){
-        edu_box = await button_handler(app,5,edu_box,Education,param,con_edu,null,null);        
+        edu_box = await button_handler(app,5,edu_box,Education,param,con_edu,null);        
     };
 
     button_edu.on('pointerup',button_edu_fo);
@@ -452,7 +459,7 @@ async function show_CV([app,width,x,y]){
     let param2 = [x,button_exp.height+spac,200];
 
     async function button_exp_fo() {
-        exp_box = await button_handler(app,7,exp_box,Experience,param2,con_exp,null,null);        
+        exp_box = await button_handler(app,7,exp_box,Experience,param2,con_exp,null);        
     };
 
     button_exp.on('pointerup',button_exp_fo);
@@ -461,7 +468,7 @@ async function show_CV([app,width,x,y]){
     let param3 = [x,button_skills.height+spac,200];
 
     async function button_skills_fo (){
-        skills_box = await button_handler(app,9,skills_box,skills,param3,con_skills,null,null);
+        skills_box = await button_handler(app,9,skills_box,skills,param3,con_skills,null);
     };
 
     button_skills.on('pointerup',button_skills_fo);

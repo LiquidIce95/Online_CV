@@ -121,7 +121,9 @@ app.stage.addChild(CV_button);
 app.stage.addChild(rope);
 
 
-
+export {
+  app
+}
 
 
 
