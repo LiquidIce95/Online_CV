@@ -3,6 +3,7 @@ from util import *
 from matplotlib import pyplot as plt
 import mpld3
 
+# crates flask app
 app = Flask(__name__)
 
 @app.route("/")
