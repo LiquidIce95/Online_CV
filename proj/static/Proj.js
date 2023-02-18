@@ -28,7 +28,7 @@ async function Plot([]){
     let con = new PIXI.Graphics()
 
 
-    let Plotti = new HybridPlot(obj,'myDiv');
+    let Plotti = new HybridPlot('myDiv',obj);
 
     let resultText = new PIXI.Text(res, { fill: 0xff0000 });
     resultText.x = 100;

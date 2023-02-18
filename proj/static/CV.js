@@ -1,49 +1,52 @@
-import { cust_style,ad_img,button_handler, add_text, Hybrid,HybridPlot } from "./Utility.js";
+import { ad_img, button_handler, add_text, Hybrid, HybridPlot, DynamicGraphics } from "./Utility.js";
+
+let text_style = {
+  fontFamily: "Verdana",
+  fontSize: 60,
+  fill: ["#000000"],
+};
 
 
-let fontsi = 20;
 
-function Personalien([x,y,width]){
+function Personalien([x, y, width]) {
+  let field = new PIXI.Graphics();
+  let space = 400;
+  field.x = x;
+  field.y = y;
 
-
-    let field = new PIXI.Graphics();
-    let space = 400;
-    field.x = x;
-    field.y = y;68
-    
-
-    let per_param = ["static/Images/bewerbungsfoto.png",0,0,200,200];
-    let picture = ad_img(per_param);
-
-    let name_ = add_text("Name",0,picture.height+20,false,width,'Verdana',fontsi);
-    let name = add_text("David Sanchez",space,name_.y,false,width,'Verdana',fontsi);
-    
-    let birth_ = add_text("Birthdate",0,name_.y+name_.height+20,false,width,'Verdana',fontsi);
-    let birth = add_text("17.05.1995",space,birth_.y,false,width,'Verdana',20);
-
-    let nation_ = add_text("Nationality",0,birth_.y+birth_.height+20,false,width,'Verdana',fontsi);
-    let nation = add_text("Switzerland, Spain",space,nation_.y,false,width,'Verdana',fontsi);
-
-    let Civi_ = add_text("Civil Status",0,nation_.y+nation_.height+20,false,width,'Verdana',fontsi);
-    let Civi = add_text("Single",space,Civi_.y,false,width,'Verdana',fontsi);
-   
-    let Add_ = add_text("Address",0,Civi_.y+Civi_.height+20,false,width,'Verdana',fontsi);
-    let Add = add_text("On Inquiry",space,Add_.y,false,width,'Verdana',fontsi);
-
-    let mobi_ = add_text("Mobile",0,Add.y+Add.height+20,false,width,'Verdana',fontsi);
-    let mobi = add_text("On Inquiry",space,mobi_.y,false,width,'Verdana',fontsi);
-
-    let mail_ = add_text("E-Mail",0,mobi_.y+mobi_.height+20,false,width,'Verdana',fontsi);
-    let mail = add_text("davidsanchez062@gmail.com",space,mail_.y,false,width,'Verdana',fontsi);
-  
+  let text_style_Pers = { ...text_style, wordWrap: true,wordWrapWidth : width };
+  text_style_Pers.fontSize = 20;
 
 
-    field.addChild(picture,name_,name,birth_,birth,nation,nation_,Civi_,Civi,Add_,Add,mobi_,mobi,mail_,mail);
 
-    return field;
+  let per_param = ["static/Images/bewerbungsfoto.png", 0, 0, 200, 200];
+  let picture = ad_img(per_param);
 
+  let name_ = add_text("Name", 0, picture.height + 20, text_style_Pers, false);
+  let name = add_text("David Sanchez", space, name_.y, text_style_Pers, false);
+
+  let birth_ = add_text("Birthdate", 0, name_.y + name_.height + 20, text_style_Pers, false);
+  let birth = add_text("17.05.1995", space, birth_.y, "Verdana", false);
+
+  let nation_ = add_text("Nationality", 0, birth_.y + birth_.height + 20, text_style_Pers, false);
+  let nation = add_text("Switzerland, Spain", space, nation_.y, text_style_Pers, false);
+
+  let Civi_ = add_text("Civil Status", 0, nation_.y + nation_.height + 20, text_style_Pers, false);
+  let Civi = add_text("Single", space, Civi_.y, text_style_Pers, false);
+
+  let Add_ = add_text("Address", 0, Civi_.y + Civi_.height + 20, text_style_Pers, false);
+  let Add = add_text("On Inquiry", space, Add_.y, text_style_Pers, false);
+
+  let mobi_ = add_text("Mobile", 0, Add.y + Add.height + 20, text_style_Pers, false);
+  let mobi = add_text("On Inquiry", space, mobi_.y, text_style_Pers, false);
+
+  let mail_ = add_text("E-Mail", 0, mobi_.y + mobi_.height + 20, text_style_Pers, false);
+  let mail = add_text("davidsanchez062@gmail.com", space, mail_.y, text_style_Pers, false);
+
+  field.addChild(picture, name_, name, birth_, birth, nation, nation_, Civi_, Civi, Add_, Add, mobi_, mobi, mail_, mail);
+
+  return field;
 }
-
 
 function Education([x,y,width]){
 
@@ -52,31 +55,33 @@ function Education([x,y,width]){
     field.x = x;
     field.y = y;
 
+    let text_style_Edu = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
+    text_style_Edu.fontSize = 20;
 
-    let time_uzh = add_text("2022 - 2025",0,0,false,width,'Verdana',fontsi);
-    let uzh = add_text("Bsc Mathematics / Computer Science (120/60)",space,time_uzh.y,false,1000,'Verdana',fontsi);
-    let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+3,false,1000,'Verdana',fontsi);
+    let time_uzh = add_text("2022 - 2025",0,0,text_style_Edu);
+    let uzh = add_text("Bsc Mathematics / Computer Science (120/60)",space,time_uzh.y,text_style_Edu);
+    let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+3,text_style_Edu);
 
 
-    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+10,true,width,'Verdana',fontsi);
-    let eth = add_text("Bsc Mathematics",space,time_eth.y,true,1000,'Verdana',fontsi);
-    let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,true,1000,'Verdana',fontsi);   
+    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+10,text_style_Edu);
+    let eth = add_text("Bsc Mathematics",space,time_eth.y,text_style_Edu);
+    let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,text_style_Edu);   
 
-    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+10,true,width,'Verdana',fontsi);
-    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,true,1000,'Verdana',fontsi);
-    let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,true,1000,'Verdana',fontsi);
+    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+10,text_style_Edu);
+    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,text_style_Edu);
+    let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,text_style_Edu);
    
-    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+10,true,width,'Verdana',fontsi);
-    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,true,1000,'Verdana',fontsi);
-    let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,true,1000,'Verdana',fontsi);
+    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+10,text_style_Edu);
+    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,text_style_Edu);
+    let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,text_style_Edu);
 
-    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+10,true,width,'Verdana',fontsi);
-    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,true,1000,'Verdana',fontsi);
-    let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,true,1000,'Verdana',fontsi);
+    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+10,text_style_Edu);
+    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,text_style_Edu);
+    let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,text_style_Edu);
 
-    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+10,true,width,'Verdana',fontsi);
-    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,true,1000,'Verdana',fontsi);
-    let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,true,1000,'Verdana',fontsi);
+    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+10,text_style_Edu);
+    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,text_style_Edu);
+    let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,text_style_Edu);
 
     let attach_con_eth2 = new PIXI.Container();
 
@@ -93,43 +98,46 @@ function Experience([x,y,width]){
     field.x = x;
     field.y = y;
 
-    let time_civi = add_text("01.2020 - 08.2020",0,0,false,width,'Verdana',fontsi);
-    let civi = add_text("Civil Service : Dataf management employee",space,time_civi.y,false,1000,'Verdana',fontsi);
-    let civi2 = add_text("University of Zurich",space,civi.y+civi.height+3,false,1000,'Verdana',fontsi);
-    let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+3,false,1000,'Verdana',fontsi);
+    let text_style_exp = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
+    text_style_exp.fontSize=20;
 
-    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+10,false,width,'Verdana',fontsi);
-    let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,false,1000,'Verdana',fontsi);
-    let trd2 = add_text("-Self teaching  of the following activities",space,trd.y+trd.height+3,false,1000,'Verdana',fontsi);
-    let trd3 = add_text("Data retrieval (Stocks, Futures)",space, trd2.y+trd2.height+3,false,1000,'Verdana',fontsi);
-    let trd4 = add_text("Coding software to convert formats of data (python,c++)",space, trd3.y+trd3.height+3,false,500,'Verdana',fontsi);
-    let trd5 = add_text("Researching and developing of trading strategies and risk models (futures, options, stocks)",space, trd4.y+trd4.height+3,false,500,'Verdana',fontsi);
-    let trd6 = add_text("Coding of Tradingstrategies on Multicharts(C#)",space, trd5.y+trd5.height+3,false,500,'Verdana',fontsi);
-    let trd7 = add_text("Conducting backtests and optimization on Multicharts",space, trd6.y+trd6.height+3,false,500,'Verdana',fontsi);
+    let time_civi = add_text("01.2020 - 08.2020",0,0,text_style_exp);
+    let civi = add_text("Civil Service : Dataf management employee",space,time_civi.y,text_style_exp);
+    let civi2 = add_text("University of Zurich",space,civi.y+civi.height+3,text_style_exp);
+    let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+3,text_style_exp);
 
-    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+10,false,width,'Verdana',fontsi);
-    let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,false,1000,'Verdana',fontsi);
-    let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+3,false,300,'Verdana',fontsi);
-    let arm3 = add_text("Coordination and planning of platoon (30 people) and reporting to superiors",space,arm2.y+arm2.height+3,false,300,'Verdana',fontsi);
-    let arm4 = add_text("Deployment at World Economic Forum 2017",space,arm3.y+arm3.height+3,false,300,'Verdana',fontsi);
+    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+10,text_style_exp);
+    let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,text_style_exp);
+    let trd2 = add_text("-Self teaching  of the following activities",space,trd.y+trd.height+3,text_style_exp);
+    let trd3 = add_text("Data retrieval (Stocks, Futures)",space, trd2.y+trd2.height+3,text_style_exp);
+    let trd4 = add_text("Coding software to convert formats of data (python,c++)",space, trd3.y+trd3.height+3,text_style_exp);
+    let trd5 = add_text("Researching and developing of trading strategies and risk models (futures, options, stocks)",space, trd4.y+trd4.height+3,text_style_exp);
+    let trd6 = add_text("Coding of Tradingstrategies on Multicharts(C#)",space, trd5.y+trd5.height+3,text_style_exp);
+    let trd7 = add_text("Conducting backtests and optimization on Multicharts",space, trd6.y+trd6.height+3,text_style_exp);
 
-    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+3,false,300,'Verdana',fontsi);
-    let ass = add_text("Assistant Project Management",space,time_ass.y,false,300,'Verdana',fontsi);
-    let ass1 = add_text("sfb Bildungszentrum Für Technologie and Management in Bergdietikon",space,ass.y+ass.height+3,false,300,'Verdana',fontsi);
-    let ass2 = add_text("-Correcting and improving of website",space,ass1.y+ass1.height+3,false,300,'Verdana',fontsi);
-    let ass3 = add_text("-Data preparation",space,ass2.y+ass2.height+3,false,300,'Verdana',fontsi);
-    let ass4 = add_text("Data Analysis",space,ass3.y+ass3.height+3,false,300,'Verdana',fontsi);
-    let ass5 = add_text("Support of team",space,ass4.y+ass4.height+3,false,300,'Verdana',fontsi);
+    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+10,text_style_exp);
+    let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,text_style_exp);
+    let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+3,text_style_exp);
+    let arm3 = add_text("Coordination and planning of platoon (30 people) and reporting to superiors",space,arm2.y+arm2.height+3,text_style_exp);
+    let arm4 = add_text("Deployment at World Economic Forum 2017",space,arm3.y+arm3.height+3,text_style_exp);
 
-    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+3,false,300,'Verdana',fontsi);
-    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,false,300,'Verdana',fontsi);
-    let app2 = add_text("tesa tape CH AG",space,app.y+app.height+3,false,300,'Verdana',fontsi);
-    let app3 = add_text("-Human Ressources",space,app2.y+app2.height+3,false,300,'Verdana',fontsi);
-    let app4 = add_text("-Sales Department",space,app3.y+app3.height+3,false,300,'Verdana',fontsi);
-    let app5 = add_text("-Purchasing Department",space,app4.y+app4.height+3,false,300,'Verdana',fontsi);
-    let app6 = add_text("-Marketing ",space,app5.y+app5.height+3,false,300,'Verdana',fontsi);
-    let app7 = add_text("Accounting",space,app6.y+app6.height+3,false,300,'Verdana',fontsi);
-    let app8 = add_text("Product Development",space,app7.y+app7.height+3,false,300,'Verdana',fontsi);
+    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+3,text_style_exp);
+    let ass = add_text("Assistant Project Management",space,time_ass.y,text_style_exp);
+    let ass1 = add_text("sfb Bildungszentrum Für Technologie and Management in Bergdietikon",space,ass.y+ass.height+3,text_style_exp);
+    let ass2 = add_text("-Correcting and improving of website",space,ass1.y+ass1.height+3,text_style_exp);
+    let ass3 = add_text("-Data preparation",space,ass2.y+ass2.height+3,text_style_exp);
+    let ass4 = add_text("Data Analysis",space,ass3.y+ass3.height+3,text_style_exp);
+    let ass5 = add_text("Support of team",space,ass4.y+ass4.height+3,text_style_exp);
+
+    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+3,text_style_exp);
+    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,text_style_exp);
+    let app2 = add_text("tesa tape CH AG",space,app.y+app.height+3,text_style_exp);
+    let app3 = add_text("-Human Ressources",space,app2.y+app2.height+3,text_style_exp);
+    let app4 = add_text("-Sales Department",space,app3.y+app3.height+3,text_style_exp);
+    let app5 = add_text("-Purchasing Department",space,app4.y+app4.height+3,text_style_exp);
+    let app6 = add_text("-Marketing ",space,app5.y+app5.height+3,text_style_exp);
+    let app7 = add_text("Accounting",space,app6.y+app6.height+3,text_style_exp);
+    let app8 = add_text("Product Development",space,app7.y+app7.height+3,text_style_exp);
 
 
    
@@ -141,7 +149,7 @@ function Experience([x,y,width]){
 
 }
 
-function skills([x,y,width]){
+function skills([x,y]){
 
     // Creating all tables
     // languages
@@ -319,117 +327,96 @@ function skills([x,y,width]){
     let Lang_table = Plotly.newPlot('skill_table1', data,layoutLan,{displaylogo: false});  
 
 
-    let Lang_tableH = new HybridPlot(Lang_table,"skill_table1");
+    let Lang_tableH = new HybridPlot("skill_table1",Lang_table);
 
     Lang_tableH.x = x;
-    Lang_tableH.y = y;
+    Lang_tableH.y = 0;
 
 
     let OS_table = Plotly.newPlot('skill_table_OS',dataOS,layoutOS,{displaylogo:false});
 
-    let OS_tableH = new HybridPlot(OS_table,"skill_table_OS");
+    let OS_tableH = new HybridPlot("skill_table_OS",OS_table);
 
 
     OS_tableH.x = x;
     OS_tableH.y = Lang_tableH.y+layoutLan["height"]+topspace;
 
     let DB_table = Plotly.newPlot('skill_table_DB',dataDB,layoutDB,{displaylogo:false});
-    let DB_tableH = new HybridPlot(DB_table,'skill_table_DB');
+    let DB_tableH = new HybridPlot('skill_table_DB',DB_table);
 
     DB_tableH.x = x;
     DB_tableH.y = OS_tableH.y+layoutOS["height"]+topspace;
 
     let PL_table = Plotly.newPlot('skill_table_PL',dataPL,layoutPL,{displaylogo:false});
-    let PL_tableH = new HybridPlot(PL_table,'skill_table_PL');
+    let PL_tableH = new HybridPlot('skill_table_PL',PL_table);
 
     PL_tableH.x = x;
     PL_tableH.y = DB_tableH.y+layoutDB["height"]+topspace;
 
     let O_table = Plotly.newPlot('skill_table_O',dataO,layoutO,{displaylogo:false});
-    let O_tableH = new HybridPlot(O_table,'skill_table_O');
+    let O_tableH = new HybridPlot('skill_table_O',O_table);
 
     O_tableH.x = x;
     O_tableH.y = PL_tableH.y+layoutPL["height"]+topspace;
 
+    let Con = new Hybrid(null);
 
-    let Con_ = new PIXI.Container();
-    let Con = new Hybrid(Con_,null);
-
-    // Lang_tableH.height = layoutLan["height"];
-    // OS_tableH.height = layoutOS["height"];
-    // DB_tableH.height = layoutDB["height"];
-    // PL_tableH.height = layoutPL["height"];
-    // O_tableH.height = layout_O["height"];
 
     Con.addChild(Lang_tableH,OS_tableH,DB_tableH,PL_tableH,O_tableH);
     Con.HEIGHT=1200;
+    Con.y=y+10;
     return Con;
 
 }
 
+
+
 //interactive CV app
-async function show_CV([app,width,x,y]){
+async function show_CV([width,x,y]){
     // here comes complete CV application
-    let field = new PIXI.Graphics();
+    let field = new DynamicGraphics(x,y,width,500,true);
 
-    let rect = new PIXI.Graphics();
-    rect.width=Math.floor(width)-50;
-    rect.beginFill(0xF5F5DC,0.5);
-    rect.drawRoundedRect(0,0,Math.floor(width)-50,500);
-    rect.endFill();
-    rect.height = 500;
+    
 
-    field.addChild(rect);
-    field.x = x;
-    field.y = y;
+    var spac = 60;
 
-    app.stage.addChild(field);
-
-    // resize such that the interactive CV is shown and can be scrolled down
-    app.renderer.resize(window.innerWidth,window.innerHeight);
-
-    var spac = 50;
-
-    var wid = 200;
     var leftspace=75;
 
-    let button_pers = add_text("Personal Information",leftspace,spac,true,1000);
-    let button_edu = add_text("Education",leftspace,button_pers.y+button_pers.height+spac,true,200);
-    let button_exp = add_text("Experience",leftspace,button_edu.y+button_edu.height+spac,true,200);
-    let button_skills = add_text("Skills",leftspace,button_exp.y+button_exp.height+spac,true,200);
+    let button_pers = add_text("Personal Information",0,0,{...text_style, wordWrap:true,wordWrapWidth:1000},true);
+    let button_edu = add_text("Education",0,0,{...text_style, wordWrap:true,wordWrapWidth:200},true);
+    let button_exp = add_text("Experience",0,0,{...text_style, wordWrap:true,wordWrapWidth:200},true);
+    let button_skills = add_text("Skills",0,0,{...text_style, wordWrap:true,wordWrapWidth:200},true);
 
 
-    let con_pers = new PIXI.Container();
-    let con_edu = new PIXI.Container();
-    let con_exp = new PIXI.Container();
-    let con_skills_ = new PIXI.Container();
-    let con_skills = new Hybrid(con_skills_,null);
+    let con_pers = new DynamicGraphics();
+    let con_edu = new DynamicGraphics();;
+    let con_exp = new DynamicGraphics();;
+    let con_skills = new Hybrid(null);
 
     con_pers.x = leftspace;
-    con_pers.y= 20;
-    con_pers.width = wid;
-    con_pers.height = button_pers.height;
+    con_pers.y= spac;
 
     con_edu.x = leftspace;
-    con_edu.y = button_edu.y;
-    con_edu.width = wid;
-    con_edu.height=button_edu.height;
+    con_edu.y = con_pers.y+button_pers.height+spac;
+    
 
     con_exp.x = leftspace;
-    con_exp.y = button_exp.y;
-    con_exp.width = wid;
-    con_exp.height = button_exp.height;
+    con_exp.y = con_edu.y+button_edu.height+spac;
+    
 
     con_skills.x = leftspace;
-    con_skills.y = button_skills.y;
-    con_skills.width = wid;
-    con_skills.height=1200;
+    con_skills.y = con_exp.y+button_exp.height+spac;
+    
 
+    con_pers.addChild(button_pers);
+    con_edu.addChild(button_edu);
+    con_exp.addChild(button_exp);
+    con_skills.addChild(button_skills);
 
-    field.addChild(button_pers,con_pers);
-    field.addChild(button_edu,con_edu);
-    field.addChild(button_exp,con_exp);
-    field.addChild(button_skills,con_skills);
+    field.addChild(con_pers);
+    field.addChild(con_edu);
+    field.addChild(con_exp);
+    field.addChild(con_skills);
 
 
 
@@ -438,37 +425,38 @@ async function show_CV([app,width,x,y]){
     let box = null;
     x = 0;
     y = button_pers.height+5;
-    let per_param = [x,y+spac,200];
+    let per_param = [x,spac,200];
 
     async function button_pers_fo() {
-        box = await button_handler(app,3,box,Personalien,per_param,con_pers,null); 
+        box = await button_handler(box,Personalien,per_param,con_pers); 
+        
     };
 
     button_pers.on('pointerup',button_pers_fo);
 
     let edu_box = null;
-    let param = [x,button_edu.height+spac,200];
+    let param = [x,spac,200];
 
     async function button_edu_fo(){
-        edu_box = await button_handler(app,5,edu_box,Education,param,con_edu,null);        
+        edu_box = await button_handler(edu_box,Education,param,con_edu); 
     };
 
     button_edu.on('pointerup',button_edu_fo);
 
     let exp_box = null;
-    let param2 = [x,button_exp.height+spac,200];
+    let param2 = [x,spac,200];
 
     async function button_exp_fo() {
-        exp_box = await button_handler(app,7,exp_box,Experience,param2,con_exp,null);        
+        exp_box = await button_handler(exp_box,Experience,param2,con_exp);
     };
 
     button_exp.on('pointerup',button_exp_fo);
 
     let skills_box = null;
-    let param3 = [x,button_skills.height+spac,200];
+    let param3 = [x,spac];
 
     async function button_skills_fo (){
-        skills_box = await button_handler(app,9,skills_box,skills,param3,con_skills,null);
+        skills_box = await button_handler(skills_box,skills,param3,con_skills);
     };
 
     button_skills.on('pointerup',button_skills_fo);

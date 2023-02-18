@@ -1,15 +1,132 @@
 // for moving objects that cannot be integrated in pixi.js
 // pxobj are pixi objects and hobj are html objects
+import { app} from "./app.js"
 
+// TODO : make dynamicgraphics class such that graphics get shifted vertically if a child gets added
+// or removed, then calls shift_vertical on sll paretns and redraw rectangle , st attribute (drawing) to true
+//  if rectangle should be drawn
+class DynamicGraphics extends PIXI.Graphics{
+    constructor(x=0,y=0,width=0,height=0,draw=false){
+        super();
+        this.x=x;
+        this.y=y;
+        this._h = height;
+        this._w = width;
+        this._draw = draw;
+
+        if (this._draw == true){
+            this.beginFill(0xF5F5DC,0.5);
+            this.drawRoundedRect(0,0,width,height);
+            this.endFill();
+
+        }
+    }
+
+    addChild(child){
+
+        let bounds = child.getLocalBounds();
+        this._h += bounds.height;
+
+
+        if ( this._draw == true){
+            this.clear();
+            this.beginFill(0xF5F5DC,0.5);
+            this.drawRoundedRect(0,0,this._w,this._h);
+            this.endFill();
+
+        }
+
+        // make this member function which drawing rectangle
+        this.shift_vertical(bounds.height);
+
+        return super.addChild(child);
+
+
+    }
+
+    removeChild(child){
+        let bounds = child.getLocalBounds();
+
+        this._h -= bounds.height;
+
+
+        if (this._draw == true){
+            this.clear();
+            this.beginFill(0xF5F5DC,0.5);
+            this.drawRoundedRect(0,0,this._w,this._h);
+            this.endFill();
+        }
+
+        this.shift_vertical(-bounds.height);
+
+        return super.removeChild(child);
+
+
+
+    }
+
+    shift_vertical(height){
+
+        let PAR = null;
+        let list_objects = null;
+        let index = 0;
+       
+    
+        if (this.parent == null){
+            return null;
+        }
+        else {
+            PAR = this.parent;
+            list_objects = PAR.children;
+            index = PAR.getChildIndex(this)+1;
+        }
+    
+    
+        if (index >= list_objects.length){
+            return list_objects;
+        }
+    
+        for (var i = index; i< list_objects.length;i++){
+    
+            let ob = list_objects[i];
+    
+            if ( ob instanceof Hybrid){
+                ob.y += height;
+                ob.shift();
+            }
+    
+            else{
+                ob.y += height;
+            }
+               
+    
+            
+    
+        }
+        
+        app.renderer.resize(window.innerWidth,PAR.height+500);
+    
+        if (PAR._draw == true){
+            PAR.clear();
+            PAR.beginFill(0xF5F5DC,0.5);
+            PAR._h+= height;
+            PAR.drawRoundedRect(0,0,PAR._w,PAR._h);
+            PAR.endFill();
+        }
+            
+        return PAR.shift_vertical(height);
+    }    
+
+    
+};
 
 class Hybrid extends PIXI.Container{
-    constructor(hobj1,id1){
+    constructor(id1,obj=null){
         super();
-        this.HEIGHT = 0;
         this._x = this.x;
         this._y = this.y;
-        this.hobj1 = hobj1;
         this.id1=id1;
+        this.ob = obj;
 
         if ( id1 != null){
             this._globalX = 0;
@@ -17,7 +134,6 @@ class Hybrid extends PIXI.Container{
         
             var div = document.getElementById(id1);
             div.style.position = "absolute";
-            div.style.borderRadius= "50px";
 
             Object.defineProperty(this, "x", {
             set: value => {
@@ -81,24 +197,12 @@ class Hybrid extends PIXI.Container{
 
     }
 
-    // destroy(){
-
-    //     for (var k = 0; k< this.children.length ; k++ ) {
-    //         let child = this.children[k];
-
-    //         child.destroy();
-    //     }
-
-    //     super.destroy();
-    // }
-
-
 
 }
 
 class HybridPlot extends Hybrid{
-    constructor(hobj1, id1){
-        super(hobj1,id1);
+    constructor( id1,obj=null){
+        super(id1,obj);
 
     }
     destroy(options){
@@ -106,65 +210,10 @@ class HybridPlot extends Hybrid{
         Plotly.purge(this.id1);
         super.destroy(options);
     }
-}
+};
 
 
-//styling function
-function cust_style(WWw,font='Helvetica',fontsiz=50,fontsty='normal',fontWei='normal',fill_col=['#000000'],stro='',Stro_thik=0,Ww=false,Lj=''){
-    // Text must be PIXI.js object with width attribute
 
-    const style = new PIXI.TextStyle({
-        fontFamily: font,
-        fontSize: fontsiz,
-        fontStyle: fontsty,
-        fontWeight: fontWei,
-        fill: fill_col, // gradient
-        stroke: stro,
-        strokeThickness: Stro_thik,
-        wordWrap: Ww,
-        wordWrapWidth: WWw,
-        lineJoin: Lj,
-    });
-    return style;
-
-
-}
-
-function shift_vertical(APP,height,list_objects,index=0,stop=0){
-    console.log("resize_graphics_called ",height);
-
-    let rect = list_objects[0];
-    
-    rect.height+= height;
-    APP.renderer.resize(window.innerWidth,rect.height+500);
-
-    if (index >= list_objects.length){
-        return list_objects;
-    }
-
-    for (var i = index; i< list_objects.length-stop;i++){
-
-        let ob = list_objects[i];
-
-        if ( ob instanceof Hybrid){
-            ob.y += height;
-            ob.shift();
-        }
-
-        else{
-            ob.y += height;
-        }
-           
-
-        
-
-    }
-    console.log("resize_graphics_endcall",height);
-    
-
-    
-    return list_objects;
-}
 // app_target always with / in front and body is a dictionary with the params for the 
 // back end function
 async function FETCH(app_target, body){
@@ -184,8 +233,8 @@ async function FETCH(app_target, body){
 }
 
 
-function add_text(text,x,y,buttonM=false,WWw,font='Verdana',fontsiz=50,fontsty='normal',fontWei='normal',fill_col=['#000000'],stro='',Stro_thik=0,Ww=true,Lj=''){
-    let label = new PIXI.Text(text,cust_style(WWw,font,fontsiz,fontsty,fontWei,fill_col,stro,Stro_thik,Ww,Lj));
+function add_text(text,x,y,style_param,buttonM=false){
+    let label = new PIXI.Text(text,style_param);
     let button = new PIXI.Graphics();
     button.x = x;
     button.y =y;
@@ -202,71 +251,48 @@ function add_text(text,x,y,buttonM=false,WWw,font='Verdana',fontsiz=50,fontsty='
 
 
 
-//opens and closes windows in application
-async function button_handler(APP,index,Ele,fun,param,button=null,app=null){
+//opens and closes windows in application, Ele is the element to be created from fun ( function) with param ( parameters)
+async function button_handler(Ele,fun,param,par){
     //parent is of button, need this for resizing the parent when child is removed
     if (Ele==null){
+
         Ele = await fun(param);
         
-        if(app != null){
-            app.stage.addChildAt(Ele,app.stage.children.length-2);
-            if ( Ele instanceof Hybrid){
-                Ele.shift();
-            }
+        
+        var height = Ele.height+30;
 
+        if(Ele instanceof Hybrid){
+            height= Ele.HEIGHT;
         }
-        else if (button!=null){
-            var height = Ele.height+30;
 
-            if(Ele instanceof Hybrid){
-                height= Ele.HEIGHT;
-            }
+        // shift_vertical(par,height);
+        par.addChild(Ele);
 
-            console.log("Ele.height: ",height,Ele);
-            let parent = button.parent;
-            shift_vertical(APP,height,parent.children,index);
-            button.addChild(Ele);
-
-            if ( Ele instanceof Hybrid){
-                Ele.shift();
-            }
-
+        if ( Ele instanceof Hybrid){
+            Ele.shift();
         }
+
+    
         return Ele;
 
     } else {
-        //so when we destroy Ele, rope still exists
-        console.log(Ele,"before destroy");
-
-        if(app!= null){
-            app.stage.removeChild(Ele).destroy({children: true});
-            app.renderer.resize(window.innerWidth,window.innerHeight);
-        }
-        else if(button != null){
-            var height = Ele.height+30;
-
-            if(Ele instanceof Hybrid){
-                height= Ele.HEIGHT;
-            }
-
-            let parent = button.parent;
-
-            
-            // console.log(Ele.children[0].x, "before change");
-            
-            button.removeChild(Ele).destroy({children: true});
-            shift_vertical(APP,-height,parent.children,index);
-            // console.log(Ele.children[0].x,"after change");
         
-            
-        }
-        // console.log(Ele," after destr")
+        var height = Ele.height+30;
 
+        if(Ele instanceof Hybrid){
+            height= Ele.HEIGHT;
+        }
+
+                
+        par.removeChild(Ele).destroy({children: true});
+        // shift_vertical(par,-height);
+    
         Ele = null;
         console.log("success");
         return Ele;
     }
 }
+
 /**
  * Cubic interpolation based on https://github.com/osuushi/Smooth.js
  */
@@ -376,11 +402,10 @@ export {
   clipInput,
   getTangent,
   cubicInterpolation,
-  cust_style,
   ad_img,
-  shift_vertical,
   Rope_,
   add_text,
   Hybrid,
-  HybridPlot
+  HybridPlot,
+  DynamicGraphics
 }

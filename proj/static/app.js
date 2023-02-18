@@ -1,13 +1,8 @@
 
 import { 
-    button_handler, 
-    FETCH,
-    clipInput,
-    getTangent,
-    cubicInterpolation,
-    cust_style, 
-    Rope_,
-    ad_img
+  add_text,
+  button_handler, 
+  Rope_,
 } from "./Utility.js";
 
 
@@ -52,7 +47,6 @@ app.stage.addChild(background);
 
 
 app.renderer.resize(window.innerWidth,window.innerHeight);
-background.re
 document.body.appendChild(app.view);
 
 
@@ -65,37 +59,25 @@ let trailTexture = PIXI.Texture.from('static/Images/black_dot.png');
 const rope = Rope_(app,trailTexture);
 
 // Main APP functionalities*************************************************************
-var spac = 300;
+var spac = 150;
 
-//Buttons
-let CV_button = new PIXI.Graphics();
-let Projects_button = new PIXI.Graphics();
+const text_style ={
+  fontFamily: 'Verdana',
+  fontSize: 100,
+  fill:['#ffffff']
+};
 
 
-CV_button.interactive = true;
-CV_button.buttonMode = true;
-Projects_button.interactive = true;
-Projects_button.buttonMode = true;
+let CV_button = add_text("Curriculum Vitae",200,80,text_style,true);
+let Projects_button = add_text("Projects",CV_button.x+CV_button.width+spac,80,text_style,true);
 
-// Labels
-let CV_label = new PIXI.Text("Curriculum Vitae", cust_style(CV_button.width,'Verdana',50,'normal','normal',['#ffffff']));
-let Projects_label = new PIXI.Text("Projects",cust_style(Projects_button.width,'Verdana',50,'normal','normal',['#ffffff']));
-
-CV_label.x = 200;
-CV_label.y = 80;
-
-Projects_label.x = CV_label.x+CV_label.width+spac;
-Projects_label.y = 80;
-
-CV_button.addChild(CV_label);
-Projects_button.addChild(Projects_label);
 
 
 //defining the behaviour of buttons
 let CV=null;
-
+let cv_params = [window.innerWidth-CV_button.x+150-CV_button.x,CV_button.x-75,CV_button.y+CV_button.height]
 async function CVButtonOnPointerUp() {
-    CV = await button_handler(app,0,CV,show_CV,[app,window.innerWidth-CV_label.x+150-CV_label.x,CV_label.x-75,CV_label.y+CV_label.height],null,app);
+  CV = await button_handler(CV,show_CV,cv_params,app.stage);
     
 }
 
@@ -104,7 +86,7 @@ CV_button.on("pointerup", CVButtonOnPointerUp);
 let PJ = null;
 // var purge = false;
 async function ProjectsButtonOnPointerUp() {
-    PJ = await button_handler(app,0,PJ,Plot,[],null,app);
+  PJ = await button_handler(PJ,Plot,[],app.stage);
     
 }
 
