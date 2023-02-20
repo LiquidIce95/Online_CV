@@ -6,13 +6,14 @@ import { app} from "./app.js"
 // or removed, then calls shift_vertical on sll paretns and redraw rectangle , st attribute (drawing) to true
 //  if rectangle should be drawn
 class DynamicGraphics extends PIXI.Graphics{
-    constructor(x=0,y=0,width=0,height=0,draw=false){
+    constructor(x=0,y=0,width=0,height=0,draw=false,name = "def"){
         super();
-        this.x=x;
-        this.y=y;
+        super.x=x;
+        super.y=y;
         this._h = height;
         this._w = width;
         this._draw = draw;
+        this.name = name;
 
         if (this._draw == true){
             this.beginFill(0xF5F5DC,0.5);
@@ -22,13 +23,39 @@ class DynamicGraphics extends PIXI.Graphics{
         }
     }
 
-    addChild(child){
+    set_x(val){
+        super.x = val;
+    }
+    set_y(val){
+        super.y = val;
+    }
+    set_h(val){
+        this._h = val;
+    }
+    set_w(val){
+        this._w = val;
+    }
 
+    addChild(child){
+        let ret = super.addChild(child);
         let bounds = child.getLocalBounds();
+
+        if(bounds.height == 0 && child instanceof DynamicGraphics){
+            console.log("height taken of ", child.name);
+            bounds.height = child._h;
+        }
+        if(bounds.width == 0 && child instanceof DynamicGraphics){
+            bounds.width = child._w;
+        }
+        
+
+        this._w = Math.max(this._w,bounds.width);        
         this._h += bounds.height;
 
 
         if ( this._draw == true){
+            console.log("drawn yess,add")
+
             this.clear();
             this.beginFill(0xF5F5DC,0.5);
             this.drawRoundedRect(0,0,this._w,this._h);
@@ -36,17 +63,28 @@ class DynamicGraphics extends PIXI.Graphics{
 
         }
 
-        // make this member function which drawing rectangle
+
         this.shift_vertical(bounds.height);
 
-        return super.addChild(child);
+        return ret;
 
 
     }
 
     removeChild(child){
+
+        let ret = super.removeChild(child);
         let bounds = child.getLocalBounds();
 
+        if(bounds.height == 0 && child instanceof DynamicGraphics){
+            bounds.height = child._h;
+        }
+        if(bounds.width == 0 && child instanceof DynamicGraphics){
+            bounds.width = child._w;
+        }
+
+
+        this._w = Math.max(this._w,bounds.width);        
         this._h -= bounds.height;
 
 
@@ -57,31 +95,42 @@ class DynamicGraphics extends PIXI.Graphics{
             this.endFill();
         }
 
+
         this.shift_vertical(-bounds.height);
 
-        return super.removeChild(child);
+        return ret;
 
 
 
     }
 
-    shift_vertical(height){
-
-        let PAR = null;
+    shift_vertical(height=0){
+        let PAR = this.parent;
         let list_objects = null;
         let index = 0;
        
     
-        if (this.parent == null){
+        if ( PAR == null){
             return null;
         }
         else {
-            PAR = this.parent;
             list_objects = PAR.children;
             index = PAR.getChildIndex(this)+1;
         }
-    
-    
+        console.log(PAR.name,PAR._draw);
+        
+        PAR._h+= height;
+
+
+        if (PAR._draw == true){
+            PAR.clear();
+            PAR.beginFill(0xF5F5DC,0.5);
+            PAR.drawRoundedRect(0,0,PAR._w,PAR._h);
+            PAR.endFill();
+        }
+
+        app.renderer.resize(window.innerWidth,app.renderer.view.height+height);
+
         if (index >= list_objects.length){
             return list_objects;
         }
@@ -90,29 +139,12 @@ class DynamicGraphics extends PIXI.Graphics{
     
             let ob = list_objects[i];
     
-            if ( ob instanceof Hybrid){
-                ob.y += height;
-                ob.shift();
-            }
-    
-            else{
-                ob.y += height;
-            }
-               
-    
             
+            ob.set_y(ob.y+height);
+           
     
         }
-        
-        app.renderer.resize(window.innerWidth,PAR.height+500);
-    
-        if (PAR._draw == true){
-            PAR.clear();
-            PAR.beginFill(0xF5F5DC,0.5);
-            PAR._h+= height;
-            PAR.drawRoundedRect(0,0,PAR._w,PAR._h);
-            PAR.endFill();
-        }
+            
             
         return PAR.shift_vertical(height);
     }    
@@ -120,89 +152,129 @@ class DynamicGraphics extends PIXI.Graphics{
     
 };
 
-class Hybrid extends PIXI.Container{
-    constructor(id1,obj=null){
-        super();
-        this._x = this.x;
-        this._y = this.y;
+class Hybrid extends DynamicGraphics{
+    constructor(id1=null,obj=null,x=0,y=0,width=0,height=0,draw=false,name = "def",){
+        super(x,y,width,height,draw,name);
         this.id1=id1;
         this.ob = obj;
+        this._globalX = 0;
+        this._globalY = 0;
 
-        if ( id1 != null){
-            this._globalX = 0;
-            this._globalY = 0;        
-        
-            var div = document.getElementById(id1);
-            div.style.position = "absolute";
-
-            Object.defineProperty(this, "x", {
-            set: value => {
-                this._x = value;
-                this.shift();
-            },
-            get: () => this._x
-            });
-            
-            Object.defineProperty(this, "y", {
-            set: value => {
-                this._y = value;
-                this.shift();
-            },
-            get: () => this._y
-            });
-        }
     } 
 
-    
 
-    ___updateGlobalCoords() {
-        console.log("UPDATE GLOBAL CALL");
-        let globalPos = this.toGlobal(new PIXI.Point());
-        console.log("globals coooos:",globalPos.x,globalPos.y);
-        this._globalX = globalPos.x;
-        this._globalY = globalPos.y;
+    addChild(child){
+        let ret = super.addChild(child);
+        this.shift_vertical(child._h);
+        this.shift();
+
+        return ret;
     }
 
+    removeChild(child){
+        let ret = super.removeChild(child);
+        this.shift_vertical(-child._h);
+        this.shift();
+
+        return ret;
+    }
+
+    set_x(val){
+        super.set_x(val);
+        this.shift();
+        
+    }
+
+    set_y(val){
+        super.set_y(val);
+        this.shift();
+    }
+
+    set_h(val){
+        super.set_h(val);
+        this.shift();
+    }
+
+    set_w(val){
+        super.set_w(val);
+        this.shift();
+    }
 
     shift(){
-        // this.x = x;
-        // this.y = y;
-        if (this.id1 != null){
-            console.log("shift, call!! ",this.x,this.y);
-
+        this.___updateGlobalCoords();
+        console.log("Object name", this.name);
+        
+        if(this.id1!= null){
+            console.log(" shifting ...");
             var vals = [0,0];
-            this.___updateGlobalCoords();
             vals[0] = this._globalX;
             vals[1] = this._globalY;
-
-            console.log("global co : ",vals[0],vals[1]);
 
             var div = document.getElementById(this.id1);
             div.style.position = "absolute";
 
-
-
-            div.style.top = `${vals[1]+this.y}px`;
-            div.style.left = `${vals[0]+this.x}px`;
+            div.style.top = `${vals[1]+super.y}px`;
+            div.style.left = `${vals[0]+super.x}px`;
         }
 
-        for (var k = 0; k< this.children.length;k++){
-            let child = this.children[k];
+        let list_objects = this.children;
+        
+        for (var i = 0; i < list_objects.length; i++){
+            let ob = list_objects[i];
 
-            if (child instanceof Hybrid){
-                child.shift();
+            if(ob instanceof Hybrid){
+
+                ob.shift();
+
             }
         }
 
+    }
+
+    ___updateGlobalCoords() {
+        let globalPos = this.toGlobal(new PIXI.Point());
+        this._globalX = globalPos.x;
+        this._globalY = globalPos.y;
+    }
+
+    shift_vertical(height=0){
+        super.shift_vertical(height);
+
+        let PAR = this.parent;
+        let list_objects = null;
+        let index =0 ;
+
+        if(PAR == null || !(PAR instanceof Hybrid)){
+            return null;
+        }
+        else{
+            list_objects = PAR.children;
+            index = PAR.getChildIndex(this)+1;
+        }
+
+        if(index >= list_objects.length){
+            return list_objects;
+        }
+
+        for(var i = index; i < list_objects.length ;i++){
+            list_objects[i].shift();
+
+        }
+
+        return PAR.shift();
 
     }
 
+    set_h(val){
+        super._h = val;
+    }
+    
 
 }
 
 class HybridPlot extends Hybrid{
-    constructor( id1,obj=null){
-        super(id1,obj);
+    constructor( id1=null,obj=null,x=0,y=0,width=0,height=0,draw=false,name = "def",){
+        super(id1,obj ,x,y,width,height,draw,name);
 
     }
     destroy(options){
@@ -210,6 +282,7 @@ class HybridPlot extends Hybrid{
         Plotly.purge(this.id1);
         super.destroy(options);
     }
+    
 };
 
 
@@ -258,37 +331,15 @@ async function button_handler(Ele,fun,param,par){
 
         Ele = await fun(param);
         
-        
-        var height = Ele.height+30;
-
-        if(Ele instanceof Hybrid){
-            height= Ele.HEIGHT;
-        }
-
-        // shift_vertical(par,height);
         par.addChild(Ele);
-
-        if ( Ele instanceof Hybrid){
-            Ele.shift();
-        }
-
     
         return Ele;
 
     } else {
-        
-        var height = Ele.height+30;
-
-        if(Ele instanceof Hybrid){
-            height= Ele.HEIGHT;
-        }
-
-                
+                        
         par.removeChild(Ele).destroy({children: true});
-        // shift_vertical(par,-height);
     
         Ele = null;
-        console.log("success");
         return Ele;
     }
 }

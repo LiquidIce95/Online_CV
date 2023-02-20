@@ -9,7 +9,9 @@ import {
 import { show_CV } from "./CV.js";
 import {Plot} from "./Proj.js"
 
-let app = new PIXI.Application();
+let app = new PIXI.Application({autoResize: true});
+
+
 
 
 const back = new PIXI.Graphics();
@@ -47,6 +49,8 @@ app.stage.addChild(background);
 
 
 app.renderer.resize(window.innerWidth,window.innerHeight);
+
+
 document.body.appendChild(app.view);
 
 

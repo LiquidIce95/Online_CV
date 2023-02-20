@@ -1,5 +1,6 @@
 import { ad_img, button_handler, add_text, Hybrid, HybridPlot, DynamicGraphics } from "./Utility.js";
 
+
 let text_style = {
   fontFamily: "Verdana",
   fontSize: 60,
@@ -9,10 +10,10 @@ let text_style = {
 
 
 function Personalien([x, y, width]) {
-  let field = new PIXI.Graphics();
+  let field = new DynamicGraphics();
   let space = 400;
-  field.x = x;
-  field.y = y;
+  field.set_x(x);
+  field.set_y(y);
 
   let text_style_Pers = { ...text_style, wordWrap: true,wordWrapWidth : width };
   text_style_Pers.fontSize = 20;
@@ -43,17 +44,31 @@ function Personalien([x, y, width]) {
   let mail_ = add_text("E-Mail", 0, mobi_.y + mobi_.height + 20, text_style_Pers, false);
   let mail = add_text("davidsanchez062@gmail.com", space, mail_.y, text_style_Pers, false);
 
-  field.addChild(picture, name_, name, birth_, birth, nation, nation_, Civi_, Civi, Add_, Add, mobi_, mobi, mail_, mail);
+  field.addChild(picture);
+  field.addChild(name_);
+  field.addChild(name);
+  field.addChild(birth_);
+  field.addChild(birth);
+  field.addChild(nation);
+  field.addChild(nation_);
+  field.addChild(Civi_);
+  field.addChild(Civi);
+  field.addChild(Add_);
+  field.addChild(Add);
+  field.addChild(mobi_);
+  field.addChild(mobi);
+  field.addChild(mail_);
+  field.addChild(mail);
 
   return field;
 }
 
 function Education([x,y,width]){
 
-    let field = new PIXI.Graphics();
+    let field = new DynamicGraphics();
     let space = 400;
-    field.x = x;
-    field.y = y;
+    field.set_x(x);
+    field.set_y(y);
 
     let text_style_Edu = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
     text_style_Edu.fontSize = 20;
@@ -85,18 +100,35 @@ function Education([x,y,width]){
 
     let attach_con_eth2 = new PIXI.Container();
 
-    field.addChild(time_uzh,uzh,uzh2,time_eth,eth,eth2,attach_con_eth2,time_eth3,eth3,eth4,time_pass,pass,pass2,time_bm,bm,bm2,time_kv,kv,kv2);
-    
+    field.addChild(time_uzh);
+    field.addChild(uzh);
+    field.addChild(uzh2);
+    field.addChild(time_eth);
+    field.addChild(eth);
+    field.addChild(eth2);
+    field.addChild(attach_con_eth2);
+    field.addChild(time_eth3);
+    field.addChild(eth3);
+    field.addChild(eth4);
+    field.addChild(time_pass);
+    field.addChild(pass);
+    field.addChild(pass2);
+    field.addChild(time_bm);
+    field.addChild(bm);
+    field.addChild(bm2);
+    field.addChild(time_kv);
+    field.addChild(kv);
+    field.addChild(kv2);
     
     return field;
 }
 
 function Experience([x,y,width]){
     
-    let field = new PIXI.Graphics();
+    let field = new DynamicGraphics();
     let space = 400;
-    field.x = x;
-    field.y = y;
+    field.set_x(x);
+    field.set_y(y);
 
     let text_style_exp = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
     text_style_exp.fontSize=20;
@@ -143,7 +175,38 @@ function Experience([x,y,width]){
    
 
 
-    field.addChild(time_civi,civi,civi2,civi3,time_trd,trd,trd2,trd3,trd4,trd5,trd6,trd7,time_arm,arm,arm2,arm3,time_ass,ass,ass1,ass2,ass3,ass4,ass5,time_app,app,app2,app3,app4,app5,app6,app7,app8);
+    field.addChild(time_civi);
+    field.addChild(civi);
+    field.addChild(civi2);
+    field.addChild(civi3);
+    field.addChild(time_trd);
+    field.addChild(trd);
+    field.addChild(trd2);
+    field.addChild(trd3);
+    field.addChild(trd4);
+    field.addChild(trd5);
+    field.addChild(trd6);
+    field.addChild(trd7);
+    field.addChild(time_arm);
+    field.addChild(arm);
+    field.addChild(arm2);
+    field.addChild(arm3);
+    field.addChild(time_ass);
+    field.addChild(ass);
+    field.addChild(ass1);
+    field.addChild(ass2);
+    field.addChild(ass3);
+    field.addChild(ass4);
+    field.addChild(ass5);
+    field.addChild(time_app);
+    field.addChild(app);
+    field.addChild(app2);
+    field.addChild(app3);
+    field.addChild(app4);
+    field.addChild(app5);
+    field.addChild(app6);
+    field.addChild(app7);
+    field.addChild(app8);
 
     return field;
 
@@ -156,13 +219,13 @@ function skills([x,y]){
 
     var layoutLan = {
         margin: {l: 2, r: 2, t: 2, b: 2},
-        height: 140,
+        height: 130,
         width: 700
     };
 
     var layoutOS = {
         margin: {l: 2, r: 2, t: 2, b: 2},
-        height: 195,
+        height: 170,
         width: 700
     };
 
@@ -321,50 +384,74 @@ function skills([x,y]){
     }
     }]
 
+    
+    
 
-    var topspace = 50;
+    var topspace = 30;
 
     let Lang_table = Plotly.newPlot('skill_table1', data,layoutLan,{displaylogo: false});  
-
+    
 
     let Lang_tableH = new HybridPlot("skill_table1",Lang_table);
 
-    Lang_tableH.x = x;
-    Lang_tableH.y = 0;
-
+    Lang_tableH.set_x(x);
+    Lang_tableH.set_y(10);
+    // Lang_tableH.set_w(layoutLan["width"]);
+    // Lang_tableH._h = layoutLan["height"];
 
     let OS_table = Plotly.newPlot('skill_table_OS',dataOS,layoutOS,{displaylogo:false});
 
     let OS_tableH = new HybridPlot("skill_table_OS",OS_table);
 
 
-    OS_tableH.x = x;
-    OS_tableH.y = Lang_tableH.y+layoutLan["height"]+topspace;
+    OS_tableH.set_x(x);
+    OS_tableH.set_y(Lang_tableH.y+64+topspace);
+    // OS_tableH.set_w(layoutOS["width"]);
+    // OS_tableH._h = layoutOS["height"];
+
 
     let DB_table = Plotly.newPlot('skill_table_DB',dataDB,layoutDB,{displaylogo:false});
     let DB_tableH = new HybridPlot('skill_table_DB',DB_table);
 
-    DB_tableH.x = x;
-    DB_tableH.y = OS_tableH.y+layoutOS["height"]+topspace;
+    DB_tableH.set_x(x);
+    DB_tableH.set_y(OS_tableH.y+90+topspace);
+    // DB_tableH.set_w(layoutDB["width"]);
+
 
     let PL_table = Plotly.newPlot('skill_table_PL',dataPL,layoutPL,{displaylogo:false});
     let PL_tableH = new HybridPlot('skill_table_PL',PL_table);
 
-    PL_tableH.x = x;
-    PL_tableH.y = DB_tableH.y+layoutDB["height"]+topspace;
+    PL_tableH.set_x(x);
+    PL_tableH.set_y(DB_tableH.y+40+topspace);
+    // PL_tableH.set_w(layoutPL["width"]);
 
     let O_table = Plotly.newPlot('skill_table_O',dataO,layoutO,{displaylogo:false});
     let O_tableH = new HybridPlot('skill_table_O',O_table);
 
-    O_tableH.x = x;
-    O_tableH.y = PL_tableH.y+layoutPL["height"]+topspace;
+    O_tableH.set_x(x);
+    O_tableH.set_y(PL_tableH.y+130+topspace);
+    // O_tableH.set_w(layoutO["width"]);
 
-    let Con = new Hybrid(null);
+    Lang_tableH.name = "lantable";
+    OS_tableH.name = "OStable";
+    DB_tableH.name = "DBtable";
+    PL_tableH.name = "PLtable";
+    O_tableH.name = "Otable";
+
+    let Con = new Hybrid();
 
 
-    Con.addChild(Lang_tableH,OS_tableH,DB_tableH,PL_tableH,O_tableH);
-    Con.HEIGHT=1200;
-    Con.y=y+10;
+    
+    Con.addChild(Lang_tableH);
+    Con.addChild(OS_tableH);
+    Con.addChild(DB_tableH);
+    Con.addChild(PL_tableH);
+    Con.addChild(O_tableH);
+
+    Con.name="Container for tables";
+    Con.set_x(x);
+    Con.set_y(y);
+    Con.set_h(600);
     return Con;
 
 }
@@ -374,9 +461,9 @@ function skills([x,y]){
 //interactive CV app
 async function show_CV([width,x,y]){
     // here comes complete CV application
-    let field = new DynamicGraphics(x,y,width,500,true);
+    let field = new DynamicGraphics(x,y,width,300,true);
 
-    
+    field.name = "CV field";
 
     var spac = 60;
 
@@ -391,22 +478,23 @@ async function show_CV([width,x,y]){
     let con_pers = new DynamicGraphics();
     let con_edu = new DynamicGraphics();;
     let con_exp = new DynamicGraphics();;
-    let con_skills = new Hybrid(null);
+    let con_skills = new Hybrid();
 
-    con_pers.x = leftspace;
-    con_pers.y= spac;
+    con_pers.set_x(leftspace);
+    con_pers.set_y( spac);
 
-    con_edu.x = leftspace;
-    con_edu.y = con_pers.y+button_pers.height+spac;
+    con_edu.set_x(leftspace);
+    con_edu.set_y(con_pers.y+button_pers.height+spac);
     
 
-    con_exp.x = leftspace;
-    con_exp.y = con_edu.y+button_edu.height+spac;
+    con_exp.set_x(leftspace);
+    con_exp.set_y(con_edu.y+button_edu.height+spac);
     
 
-    con_skills.x = leftspace;
-    con_skills.y = con_exp.y+button_exp.height+spac;
-    
+    con_skills.set_x(leftspace);
+    con_skills.set_y(con_exp.y+button_exp.height+spac);
+    con_skills.name = "skill container";
+    // con_skills._h = 2000;
 
     con_pers.addChild(button_pers);
     con_edu.addChild(button_edu);
@@ -418,9 +506,7 @@ async function show_CV([width,x,y]){
     field.addChild(con_exp);
     field.addChild(con_skills);
 
-
-
-    // NOTE for some reason does not work with button.x directly...
+    con_skills.shift_vertical(0);
     //Behaviour of labels/button
     let box = null;
     x = 0;
@@ -460,7 +546,6 @@ async function show_CV([width,x,y]){
     };
 
     button_skills.on('pointerup',button_skills_fo);
-
 
 
 
