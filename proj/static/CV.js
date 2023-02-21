@@ -20,28 +20,28 @@ function Personalien([x, y, width]) {
 
 
 
-  let per_param = ["static/Images/bewerbungsfoto.png", 0, 0, 200, 200];
+  let per_param = ["static/Images/bewerbungsfoto.png", 0, 50, 200, 200];
   let picture = ad_img(per_param);
 
-  let name_ = add_text("Name", 0, picture.height + 20, text_style_Pers, false);
+  let name_ = add_text("Name", 0, picture.height + 50, text_style_Pers, false);
   let name = add_text("David Sanchez", space, name_.y, text_style_Pers, false);
 
-  let birth_ = add_text("Birthdate", 0, name_.y + name_.height + 20, text_style_Pers, false);
+  let birth_ = add_text("Birthdate", 0, name_.y + name_.height + 50, text_style_Pers, false);
   let birth = add_text("17.05.1995", space, birth_.y, "Verdana", false);
 
-  let nation_ = add_text("Nationality", 0, birth_.y + birth_.height + 20, text_style_Pers, false);
+  let nation_ = add_text("Nationality", 0, birth_.y + birth_.height + 50, text_style_Pers, false);
   let nation = add_text("Switzerland, Spain", space, nation_.y, text_style_Pers, false);
 
-  let Civi_ = add_text("Civil Status", 0, nation_.y + nation_.height + 20, text_style_Pers, false);
+  let Civi_ = add_text("Civil Status", 0, nation_.y + nation_.height + 50, text_style_Pers, false);
   let Civi = add_text("Single", space, Civi_.y, text_style_Pers, false);
 
-  let Add_ = add_text("Address", 0, Civi_.y + Civi_.height + 20, text_style_Pers, false);
+  let Add_ = add_text("Address", 0, Civi_.y + Civi_.height + 50, text_style_Pers, false);
   let Add = add_text("On Inquiry", space, Add_.y, text_style_Pers, false);
 
-  let mobi_ = add_text("Mobile", 0, Add.y + Add.height + 20, text_style_Pers, false);
+  let mobi_ = add_text("Mobile", 0, Add.y + Add.height + 50, text_style_Pers, false);
   let mobi = add_text("On Inquiry", space, mobi_.y, text_style_Pers, false);
 
-  let mail_ = add_text("E-Mail", 0, mobi_.y + mobi_.height + 20, text_style_Pers, false);
+  let mail_ = add_text("E-Mail", 0, mobi_.y + mobi_.height + 50, text_style_Pers, false);
   let mail = add_text("davidsanchez062@gmail.com", space, mail_.y, text_style_Pers, false);
 
   field.addChild(picture);
@@ -69,56 +69,152 @@ function Education([x,y,width]){
     let space = 400;
     field.set_x(x);
     field.set_y(y);
-
+    field.name = "Educaton field";
     let text_style_Edu = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
     text_style_Edu.fontSize = 20;
 
-    let time_uzh = add_text("2022 - 2025",0,0,text_style_Edu);
-    let uzh = add_text("Bsc Mathematics / Computer Science (120/60)",space,time_uzh.y,text_style_Edu);
-    let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+3,text_style_Edu);
+
+    let time_uzh = add_text("2022 - 2025",0,50,text_style_Edu,true);
+    let uzh = add_text("Bsc Mathematics / Computer Science (120/60)",space,time_uzh.y,text_style_Edu,true);
+    let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+3,text_style_Edu,true);
+    let con_uzh = new DynamicGraphics();
+    con_uzh.set_x(space-150);
+    con_uzh.set_y(uzh2.y+uzh2.height+10);
+
+    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+50,text_style_Edu,true);
+    let eth = add_text("Bsc Mathematics",space,time_eth.y,text_style_Edu,true);
+    let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,text_style_Edu,true);   
+    let con_eth2 = new DynamicGraphics();
+    con_eth2.set_x(space-150);
+    con_eth2.set_y(eth2.y+eth2.height+10);
+
+    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+50,text_style_Edu,true);
+    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,text_style_Edu,true);
+    let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,text_style_Edu,true);
+    let con_eth = new DynamicGraphics();
+    con_eth.set_x(space-150);
+    con_eth.set_y(eth4.y+eth4.height+10);    
 
 
-    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+10,text_style_Edu);
-    let eth = add_text("Bsc Mathematics",space,time_eth.y,text_style_Edu);
-    let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,text_style_Edu);   
+    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+50,text_style_Edu,true);
+    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,text_style_Edu,true);
+    let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,text_style_Edu,true);
+    let con_pass = new DynamicGraphics();
+    con_pass.set_x(space-325);
+    con_pass.set_y(pass2.y+pass2.height+10);
 
-    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+10,text_style_Edu);
-    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,text_style_Edu);
-    let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,text_style_Edu);
-   
-    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+10,text_style_Edu);
-    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,text_style_Edu);
-    let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,text_style_Edu);
+    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+50,text_style_Edu,true);
+    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,text_style_Edu,true);
+    let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,text_style_Edu,true);
+    let con_bm = new DynamicGraphics();
+    con_bm.set_x(space-325);
+    con_bm.set_y(bm2.y+bm2.height+10);
 
-    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+10,text_style_Edu);
-    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,text_style_Edu);
-    let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,text_style_Edu);
 
-    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+10,text_style_Edu);
-    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,text_style_Edu);
-    let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,text_style_Edu);
+    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+50,text_style_Edu,true);
+    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,text_style_Edu,true);
+    let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,text_style_Edu,true);
+    let con_kv = new DynamicGraphics();
+    con_kv.set_x(space-325);
+    con_kv.set_y(kv2.y+kv2.height+10);
 
-    let attach_con_eth2 = new PIXI.Container();
+    let parms = ["static/Images/anhange/00/00.png", 0, 0, 1000, 400];
+
+    let pico = null;
+    async function insert_attach_uzh (){
+        pico = await button_handler(pico,ad_img,parms,con_uzh);
+    };
+
+    uzh.on('pointerup',insert_attach_uzh);
+    time_uzh.on('pointerup',insert_attach_uzh);
+    uzh2.on('pointerup',insert_attach_uzh);
+// 
+    let para_eth2 = ["static/Images/anhange/02/02_1.png", 0, 0, 1000, 1300];
+
+    let attach_eth2 = null;
+    async function insert_attach_eth2 (){
+        attach_eth2 = await button_handler(attach_eth2,ad_img,para_eth2,con_eth2);
+    };
+
+    eth.on('pointerup',insert_attach_eth2);
+    time_eth.on('pointerup',insert_attach_eth2);
+    eth2.on('pointerup',insert_attach_eth2);
+// 
+    let para_eth = ["static/Images/anhange/01/01-1.png", 0, 0, 1000, 1300];
+
+    let attach_eth = null;
+    async function insert_attach_eth (){
+        attach_eth = await button_handler(attach_eth,ad_img,para_eth,con_eth);
+    };
+
+    eth3.on('pointerup',insert_attach_eth);
+    time_eth3.on('pointerup',insert_attach_eth);
+    eth4.on('pointerup',insert_attach_eth);
+// 
+    let para_pass = ["static/Images/anhange/04/04-1.png", 0, 0, 1300, 1000];
+
+    let attach_pass = null;
+    async function insert_attach_pass (){
+        attach_pass = await button_handler(attach_pass,ad_img,para_pass,con_pass);
+    };
+
+    pass.on('pointerup',insert_attach_pass);
+    time_pass.on('pointerup',insert_attach_pass);
+    pass2.on('pointerup',insert_attach_pass);
+// 
+    let para_bm = ["static/Images/anhange/05/05-1.png", 0, 0, 1300, 1000];
+
+    let attach_bm = null;
+    async function insert_attach_bm (){
+        attach_bm = await button_handler(attach_bm,ad_img,para_bm,con_bm);
+    };
+
+    bm.on('pointerup',insert_attach_bm);
+    time_bm.on('pointerup',insert_attach_bm);
+    bm2.on('pointerup',insert_attach_bm);
+// 
+    let para_kv = ["static/Images/anhange/06/06-1.png", 0, 0, 1300, 1000];
+
+    let attach_kv = null;
+    async function insert_attach_kv (){
+        attach_kv = await button_handler(attach_kv,ad_img,para_kv,con_kv);
+    };
+
+    kv.on('pointerup',insert_attach_kv);
+    time_kv.on('pointerup',insert_attach_kv);
+    kv2.on('pointerup',insert_attach_kv);
 
     field.addChild(time_uzh);
     field.addChild(uzh);
     field.addChild(uzh2);
+    field.addChild(con_uzh);
+
     field.addChild(time_eth);
     field.addChild(eth);
     field.addChild(eth2);
-    field.addChild(attach_con_eth2);
+    field.addChild(con_eth2);
+
     field.addChild(time_eth3);
     field.addChild(eth3);
     field.addChild(eth4);
+    field.addChild(con_eth);
+
     field.addChild(time_pass);
     field.addChild(pass);
     field.addChild(pass2);
+    field.addChild(con_pass);
+
     field.addChild(time_bm);
     field.addChild(bm);
     field.addChild(bm2);
+    field.addChild(con_bm);
+
     field.addChild(time_kv);
     field.addChild(kv);
     field.addChild(kv2);
+    field.addChild(con_kv);
+
+    
     
     return field;
 }
@@ -133,52 +229,139 @@ function Experience([x,y,width]){
     let text_style_exp = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
     text_style_exp.fontSize=20;
 
-    let time_civi = add_text("01.2020 - 08.2020",0,0,text_style_exp);
-    let civi = add_text("Civil Service : Dataf management employee",space,time_civi.y,text_style_exp);
-    let civi2 = add_text("University of Zurich",space,civi.y+civi.height+3,text_style_exp);
-    let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+3,text_style_exp);
-
-    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+10,text_style_exp);
-    let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,text_style_exp);
-    let trd2 = add_text("-Self teaching  of the following activities",space,trd.y+trd.height+3,text_style_exp);
-    let trd3 = add_text("Data retrieval (Stocks, Futures)",space, trd2.y+trd2.height+3,text_style_exp);
-    let trd4 = add_text("Coding software to convert formats of data (python,c++)",space, trd3.y+trd3.height+3,text_style_exp);
-    let trd5 = add_text("Researching and developing of trading strategies and risk models (futures, options, stocks)",space, trd4.y+trd4.height+3,text_style_exp);
-    let trd6 = add_text("Coding of Tradingstrategies on Multicharts(C#)",space, trd5.y+trd5.height+3,text_style_exp);
-    let trd7 = add_text("Conducting backtests and optimization on Multicharts",space, trd6.y+trd6.height+3,text_style_exp);
-
-    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+10,text_style_exp);
-    let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,text_style_exp);
-    let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+3,text_style_exp);
-    let arm3 = add_text("Coordination and planning of platoon (30 people) and reporting to superiors",space,arm2.y+arm2.height+3,text_style_exp);
-    let arm4 = add_text("Deployment at World Economic Forum 2017",space,arm3.y+arm3.height+3,text_style_exp);
-
-    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+3,text_style_exp);
-    let ass = add_text("Assistant Project Management",space,time_ass.y,text_style_exp);
-    let ass1 = add_text("sfb Bildungszentrum Für Technologie and Management in Bergdietikon",space,ass.y+ass.height+3,text_style_exp);
-    let ass2 = add_text("-Correcting and improving of website",space,ass1.y+ass1.height+3,text_style_exp);
-    let ass3 = add_text("-Data preparation",space,ass2.y+ass2.height+3,text_style_exp);
-    let ass4 = add_text("Data Analysis",space,ass3.y+ass3.height+3,text_style_exp);
-    let ass5 = add_text("Support of team",space,ass4.y+ass4.height+3,text_style_exp);
-
-    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+3,text_style_exp);
-    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,text_style_exp);
-    let app2 = add_text("tesa tape CH AG",space,app.y+app.height+3,text_style_exp);
-    let app3 = add_text("-Human Ressources",space,app2.y+app2.height+3,text_style_exp);
-    let app4 = add_text("-Sales Department",space,app3.y+app3.height+3,text_style_exp);
-    let app5 = add_text("-Purchasing Department",space,app4.y+app4.height+3,text_style_exp);
-    let app6 = add_text("-Marketing ",space,app5.y+app5.height+3,text_style_exp);
-    let app7 = add_text("Accounting",space,app6.y+app6.height+3,text_style_exp);
-    let app8 = add_text("Product Development",space,app7.y+app7.height+3,text_style_exp);
+    let time_civi = add_text("01.2020 - 08.2020",0,50,text_style_exp,true);
+    let civi = add_text("Civil Service : Dataf management employee",space,time_civi.y,text_style_exp,true);
+    let civi2 = add_text("University of Zurich",space,civi.y+civi.height+3,text_style_exp,true);
+    let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+3,text_style_exp,true);
+    let con_civi = new DynamicGraphics();
+    con_civi.set_x(space-150);
+    con_civi.set_y(civi3.y+civi3.height+10);
 
 
-   
+    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+50,text_style_exp,true);
+    let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,text_style_exp,true);
+    let trd2 = add_text("-Self teaching  of the following activities",space,trd.y+trd.height+3,text_style_exp,true);
+    let trd3 = add_text("Data retrieval (Stocks, Futures)",space, trd2.y+trd2.height+3,text_style_exp,true);
+    let trd4 = add_text("Coding software to convert formats of data (python,c++)",space, trd3.y+trd3.height+3,text_style_exp,true);
+    let trd5 = add_text("Researching and developing of trading strategies and risk models (futures, options, stocks)",space, trd4.y+trd4.height+3,text_style_exp,true);
+    let trd6 = add_text("Coding of Tradingstrategies on Multicharts(C#)",space, trd5.y+trd5.height+3,text_style_exp,true);
+    let trd7 = add_text("Conducting backtests and optimization on Multicharts",space, trd6.y+trd6.height+3,text_style_exp,true);
+
+
+    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+50,text_style_exp,true);
+    let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,text_style_exp,true);
+    let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+3,text_style_exp,true);
+    let arm3 = add_text("Coordination and planning of platoon (30 people) and reporting to superiors",space,arm2.y+arm2.height+3,text_style_exp,true);
+    let arm4 = add_text("Deployment at World Economic Forum 2017",space,arm3.y+arm3.height+3,text_style_exp,true);
+    let con_arm = new DynamicGraphics();
+    con_arm.set_x(space-325);
+    con_arm.set_y(arm4.y+arm4.height+10);
+
+    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+50,text_style_exp,true);
+    let ass = add_text("Assistant Project Management",space,time_ass.y,text_style_exp,true);
+    let ass1 = add_text("sfb Bildungszentrum Für Technologie and Management in Bergdietikon",space,ass.y+ass.height+3,text_style_exp,true);
+    let ass2 = add_text("-Correcting and improving of website",space,ass1.y+ass1.height+3,text_style_exp,true);
+    let ass3 = add_text("-Data preparation",space,ass2.y+ass2.height+3,text_style_exp,true);
+    let ass4 = add_text("Data Analysis",space,ass3.y+ass3.height+3,text_style_exp,true);
+    let ass5 = add_text("Support of team",space,ass4.y+ass4.height+3,text_style_exp,true);
+    let con_ass = new DynamicGraphics();
+    con_ass.set_x(space-150);
+    con_ass.set_y(ass5.y+ass5.height+10);
+
+
+    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+50,text_style_exp,true);
+    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,text_style_exp,true);
+    let app2 = add_text("tesa tape CH AG",space,app.y+app.height+3,text_style_exp,true);
+    let app3 = add_text("-Human Ressources",space,app2.y+app2.height+3,text_style_exp,true);
+    let app4 = add_text("-Sales Department",space,app3.y+app3.height+3,text_style_exp,true);
+    let app5 = add_text("-Purchasing Department",space,app4.y+app4.height+3,text_style_exp,true);
+    let app6 = add_text("-Marketing ",space,app5.y+app5.height+3,text_style_exp,true);
+    let app7 = add_text("Accounting",space,app6.y+app6.height+3,text_style_exp,true);
+    let app8 = add_text("Product Development",space,app7.y+app7.height+3,text_style_exp,true);
+    let con_app = new DynamicGraphics();
+    con_app.set_x(space-150);
+    con_app.set_y(app8.y+app8.height+10);
+
+
+    let para_civi = ["static/Images/anhange/13/13-1.png", 0, 0, 1000, 1300];
+
+    let attach_civi = null;
+    async function insert_attach_civi (){
+        attach_civi = await button_handler(attach_civi,ad_img,para_civi,con_civi);
+    };
+
+    civi.on('pointerup',insert_attach_civi);
+    time_civi.on('pointerup',insert_attach_civi);
+    civi2.on('pointerup',insert_attach_civi);
+    civi3.on('pointerup',insert_attach_civi);
+// 
+    let para_arm = ["static/Images/anhange/07/07-1.png", 0, 0, 1300, 1000];
+    let para_arm2 = ["static/Images/anhange/11/11-1.png", 175, 1010, 1000, 1300];
+    let para_arm3 = ["static/Images/anhange/12/12-1.png", 175, 2350, 1000, 1300];
+
+
+    let attach_arm = null;
+    let attach_arm2 = null;
+    let attach_arm3 = null;
+
+    async function insert_attach_arm (){
+        attach_arm = await button_handler(attach_arm,ad_img,para_arm,con_arm);
+        attach_arm2 = await button_handler(attach_arm2,ad_img,para_arm2,con_arm);
+        attach_arm3 = await button_handler(attach_arm3,ad_img,para_arm3,con_arm);
+
+    };
+
+    arm.on('pointerup',insert_attach_arm);
+    time_arm.on('pointerup',insert_attach_arm);
+    arm2.on('pointerup',insert_attach_arm);
+    arm3.on('pointerup',insert_attach_arm);
+    arm4.on('pointerup',insert_attach_arm);
+
+// 
+    let para_ass = ["static/Images/anhange/18/18-1.png", 0, 0, 1000, 1300];
+    
+    let attach_ass = null;
+    async function insert_attach_ass (){
+        attach_ass = await button_handler(attach_ass,ad_img,para_ass,con_ass);
+    };
+
+    ass.on('pointerup',insert_attach_ass);
+    time_ass.on('pointerup',insert_attach_ass);
+    ass2.on('pointerup',insert_attach_ass);
+    ass3.on('pointerup',insert_attach_ass);
+    ass4.on('pointerup',insert_attach_ass);
+    ass5.on('pointerup',insert_attach_ass);
+
+// 
+    let para_app = ["static/Images/anhange/16/16-1.png", 0, 0, 1000, 1300];
+    let para_app2 = ["static/Images/anhange/17/17-1.png", 0, 1350, 1000, 1300];
+
+    let attach_app = null;
+    let attach_app2 = null;
+    async function insert_attach_app (){
+        attach_app = await button_handler(attach_app,ad_img,para_app,con_app);
+        attach_app2 = await button_handler(attach_app2,ad_img,para_app2,con_app);
+
+    };
+
+    app.on('pointerup',insert_attach_app);
+    time_app.on('pointerup',insert_attach_app);
+    app2.on('pointerup',insert_attach_app);
+    app3.on('pointerup',insert_attach_app);
+    app4.on('pointerup',insert_attach_app);
+    app5.on('pointerup',insert_attach_app);
+    app6.on('pointerup',insert_attach_app);
+    app7.on('pointerup',insert_attach_app);
+    app8.on('pointerup',insert_attach_app);
+
 
 
     field.addChild(time_civi);
     field.addChild(civi);
     field.addChild(civi2);
     field.addChild(civi3);
+    field.addChild(con_civi);
+
     field.addChild(time_trd);
     field.addChild(trd);
     field.addChild(trd2);
@@ -187,10 +370,13 @@ function Experience([x,y,width]){
     field.addChild(trd5);
     field.addChild(trd6);
     field.addChild(trd7);
+
     field.addChild(time_arm);
     field.addChild(arm);
     field.addChild(arm2);
     field.addChild(arm3);
+    field.addChild(con_arm);
+
     field.addChild(time_ass);
     field.addChild(ass);
     field.addChild(ass1);
@@ -198,6 +384,8 @@ function Experience([x,y,width]){
     field.addChild(ass3);
     field.addChild(ass4);
     field.addChild(ass5);
+    field.addChild(con_ass);
+
     field.addChild(time_app);
     field.addChild(app);
     field.addChild(app2);
@@ -207,6 +395,7 @@ function Experience([x,y,width]){
     field.addChild(app6);
     field.addChild(app7);
     field.addChild(app8);
+    field.addChild(con_app);
 
     return field;
 
@@ -485,6 +674,7 @@ async function show_CV([width,x,y]){
 
     con_edu.set_x(leftspace);
     con_edu.set_y(con_pers.y+button_pers.height+spac);
+    con_edu.name="Container Edu";
     
 
     con_exp.set_x(leftspace);

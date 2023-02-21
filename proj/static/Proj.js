@@ -33,7 +33,9 @@ async function Plot([]){
     let resultText = new PIXI.Text(res, { fill: 0xff0000 });
     resultText.x = 100;
     resultText.y = 300;
-    con.addChild(resultText);
+    // con.addChild(resultText);
+    Plotti.set_x(100);
+    Plotti.set_y(150);
     con.addChild(Plotti);
 
     return con;

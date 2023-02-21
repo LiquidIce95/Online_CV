@@ -41,7 +41,6 @@ class DynamicGraphics extends PIXI.Graphics{
         let bounds = child.getLocalBounds();
 
         if(bounds.height == 0 && child instanceof DynamicGraphics){
-            console.log("height taken of ", child.name);
             bounds.height = child._h;
         }
         if(bounds.width == 0 && child instanceof DynamicGraphics){
@@ -54,7 +53,6 @@ class DynamicGraphics extends PIXI.Graphics{
 
 
         if ( this._draw == true){
-            console.log("drawn yess,add")
 
             this.clear();
             this.beginFill(0xF5F5DC,0.5);
@@ -75,6 +73,8 @@ class DynamicGraphics extends PIXI.Graphics{
 
         let ret = super.removeChild(child);
         let bounds = child.getLocalBounds();
+
+        console.log(this.name,bounds.height, "remove child call");
 
         if(bounds.height == 0 && child instanceof DynamicGraphics){
             bounds.height = child._h;
@@ -109,7 +109,7 @@ class DynamicGraphics extends PIXI.Graphics{
         let list_objects = null;
         let index = 0;
        
-    
+
         if ( PAR == null){
             return null;
         }
@@ -117,7 +117,6 @@ class DynamicGraphics extends PIXI.Graphics{
             list_objects = PAR.children;
             index = PAR.getChildIndex(this)+1;
         }
-        console.log(PAR.name,PAR._draw);
         
         PAR._h+= height;
 
@@ -129,25 +128,34 @@ class DynamicGraphics extends PIXI.Graphics{
             PAR.endFill();
         }
 
-        app.renderer.resize(window.innerWidth,app.renderer.view.height+height);
+        // app.renderer.resize(window.innerWidth,app.renderer.view.height+height);
 
-        if (index >= list_objects.length){
-            return list_objects;
-        }
     
         for (var i = index; i< list_objects.length;i++){
     
             let ob = list_objects[i];
     
-            
-            ob.set_y(ob.y+height);
+            if ( ob instanceof DynamicGraphics){
+
+                ob.set_y(ob.y+height);
+            }
            
     
         }
             
-            
-        return PAR.shift_vertical(height);
+        if ( PAR instanceof DynamicGraphics){
+            return PAR.shift_vertical(height);
+
+        }
     }    
+
+    set_buttonMode(val){
+        super.buttonMode = val;
+    }
+
+    set_interactive(val){
+        super.interactive = val;
+    }
 
     
 };
@@ -205,7 +213,7 @@ class Hybrid extends DynamicGraphics{
         console.log("Object name", this.name);
         
         if(this.id1!= null){
-            console.log(" shifting ...");
+
             var vals = [0,0];
             vals[0] = this._globalX;
             vals[1] = this._globalY;
@@ -252,16 +260,21 @@ class Hybrid extends DynamicGraphics{
             index = PAR.getChildIndex(this)+1;
         }
 
-        if(index >= list_objects.length){
-            return list_objects;
-        }
-
         for(var i = index; i < list_objects.length ;i++){
-            list_objects[i].shift();
+
+            let ob = list_objects[i];
+
+            if ( ob instanceof Hybrid){
+                list_objects[i].shift();
+
+            }
 
         }
 
-        return PAR.shift();
+        if ( PAR instanceof Hybrid){
+            return PAR.shift();
+
+        }
 
     }
 
@@ -278,7 +291,6 @@ class HybridPlot extends Hybrid{
 
     }
     destroy(options){
-        console.log("Destructor called********************");
         Plotly.purge(this.id1);
         super.destroy(options);
     }
@@ -308,12 +320,12 @@ async function FETCH(app_target, body){
 
 function add_text(text,x,y,style_param,buttonM=false){
     let label = new PIXI.Text(text,style_param);
-    let button = new PIXI.Graphics();
-    button.x = x;
-    button.y =y;
+    let button = new DynamicGraphics();
+    button.set_x(x);
+    button.set_y(y);
     
-    button.buttonMode = buttonM;
-    button.interactive = buttonM;
+    button.set_buttonMode(buttonM);
+    button.set_interactive(buttonM);
 
 
 
@@ -376,10 +388,19 @@ function ad_img([path,x,y,width=100,height=100]){
 
     im_s.width = width;
     im_s.height = height;
-    im_s.x = x;
-    im_s.y = y;
+    
+    im_s.x=x;
+    im_s.y=y;
+    let Imag = new DynamicGraphics();
+    Imag.addChild(im_s);
 
-    return im_s;
+    // Imag.set_x(x);
+    // Imag.set_y(y);
+    // Imag.set_h(height);
+    // Imag.set_w(width);
+    console.log("ad_img call 2",Imag,im_s);
+
+    return Imag;
 
 }
 
@@ -409,7 +430,6 @@ function Rope_(app,trailTexture){
     rope.blendmode = PIXI.BLEND_MODES.ADD;
 
     app.stage.addChild(rope);
-    console.log('HELLO!');
 
     let mouseposition = { x: 0, y: 0 };
     app.stage.interactive = true;
