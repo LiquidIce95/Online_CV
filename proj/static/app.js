@@ -22,18 +22,25 @@ back.endFill();
 
 app.stage.addChild(back);
 
+let clicked = false;
+
+
 
 let video = document.createElement("video");
-video.src = "./static/Images/Background_vid.mp4";
-video.loop = true;
-video.style.width = "100%";
-video.style.height = "100%";
-video.style.objectFit = "cover";
-
 
 
 document.addEventListener("click", function() {
-  video.play();
+  if(clicked == false){
+    video.src = "./static/Images/Background_vid.mp4";
+    video.loop = true;
+    video.autoPlay = false;
+    video.style.width = "100%";
+    video.style.height = "100%";
+    video.style.objectFit = "cover";
+    video.play();
+  }
+  clicked = true;
+  
 });
 
 const texture = PIXI.Texture.from(video);
@@ -73,8 +80,8 @@ const text_style ={
 };
 
 
-let CV_button = add_text("Curriculum Vitae",200,80,text_style,true);
-let Projects_button = add_text("Projects",CV_button.x+CV_button.width+spac,80,text_style,true);
+let CV_button = add_text("Curriculum Vitae",200,80,text_style,true,true);
+let Projects_button = add_text("Projects",CV_button.x+CV_button.width+spac,80,text_style,true,true);
 
 let CV_container = new DynamicGraphics(200,80);
 // Store the previous height of the container
@@ -93,8 +100,6 @@ function resizeRenderer() {
   previousHeight = newHeight;
 }
 
-app.ticker.minFPS = 45;
-app.ticker.maxFPS = 45;
 
 // Add an event listener to the Pixi.js ticker to continuously update the renderer size
 app.ticker.add(() => {
@@ -105,6 +110,10 @@ app.ticker.add(() => {
   }
 });
 
+let hint = add_text("CLICK ON THE ARROWS TO SHOW OCNTENT",spac*2,200,{...text_style, fontSize:20,fill:['#FF0000']},true,true,-15,5,15,15);
+app.stage.addChild(hint);
+
+let rem_hint = true;
 
 let Projects_container = new DynamicGraphics(CV_button.x+CV_button.width+spac);
 
@@ -115,6 +124,10 @@ let CV=null;
 let cv_params = [window.innerWidth-CV_button.x+150-CV_button.x,-50,CV_button.height+10]
 async function CVButtonOnPointerUp() {
   CV = await button_handler(CV,show_CV,cv_params,CV_container);
+
+  if(rem_hint){
+    app.stage.removeChild(hint);
+  }
     
 }
 
@@ -123,6 +136,9 @@ CV_button.on("pointerup", CVButtonOnPointerUp);
 let PJ = null;
 async function ProjectsButtonOnPointerUp() {
   PJ = await button_handler(PJ,Plot,[],Projects_container);
+  if(rem_hint){
+    app.stage.removeChild(hint);
+  }
     
 }
 

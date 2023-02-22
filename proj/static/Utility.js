@@ -318,7 +318,7 @@ async function FETCH(app_target, body){
 }
 
 
-function add_text(text,x,y,style_param,buttonM=false){
+function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=40,h2=40,w2=40){
     let label = new PIXI.Text(text,style_param);
     let button = new DynamicGraphics();
     button.set_x(x);
@@ -327,6 +327,12 @@ function add_text(text,x,y,style_param,buttonM=false){
     button.set_buttonMode(buttonM);
     button.set_interactive(buttonM);
 
+    if(triangle == true){
+        let tri_l = ad_img(["static/Images/tri_r.png",x2,y2,h2,w2]);
+        button.addChild(tri_l);
+
+        
+    }
 
 
     button.addChild(label);
@@ -381,11 +387,15 @@ function cubicInterpolation(array, t, tangentFactor) {
     return (2 * t3 - 3 * t2 + 1) * p[0] + (t3 - 2 * t2 + t) * m[0] + (-2 * t3 + 3 * t2) * p[1] + (t3 - t2) * m[1];
 }
 
-function ad_img([path,x,y,width=100,height=100]){
+function ad_img([path,x,y,width=100,height=100,anchor=0.0]){
     // load an image
     let im_s = PIXI.Texture.from(path);
     im_s = new PIXI.Sprite(im_s);
 
+    if(anchor != 0.0){
+
+        im_s.anchor.set(anchor);
+    }
     im_s.width = width;
     im_s.height = height;
     
@@ -394,10 +404,6 @@ function ad_img([path,x,y,width=100,height=100]){
     let Imag = new DynamicGraphics();
     Imag.addChild(im_s);
 
-    // Imag.set_x(x);
-    // Imag.set_y(y);
-    // Imag.set_h(height);
-    // Imag.set_w(width);
     console.log("ad_img call 2",Imag,im_s);
 
     return Imag;
