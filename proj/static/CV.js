@@ -589,7 +589,7 @@ function skills([x,y]){
 
     
     let link = add_text("click here to get to my github!",x,20,{...text_style, fontSize:20,fill:['#8B0000']},true,true,-15,5,15,15);
-    link.on('click', () => {
+    link.on('pointerup', () => {
         // navigate to GitHub in a new tab
         window.open('https://github.com/LiquidIce95?tab=repositories', '_blank');
     });
