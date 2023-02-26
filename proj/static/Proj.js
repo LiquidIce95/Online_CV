@@ -22,6 +22,7 @@ async function Plot([]){
     div.style.position = "absolute";
     div.style.top = "100px";
     div.style.left = "200px";
+    div.style.position = "fixed";
 
     let obj = Plotly.newPlot('myDiv', data,{},{displaylogo: false});
 

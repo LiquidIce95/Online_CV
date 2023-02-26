@@ -28,9 +28,11 @@ class DynamicGraphics extends PIXI.Graphics{
     }
     set_y(val){
         super.y = val;
+
     }
     set_h(val){
         this._h = val;
+
     }
     set_w(val){
         this._w = val;
@@ -49,7 +51,7 @@ class DynamicGraphics extends PIXI.Graphics{
         
 
         this._w = Math.max(this._w,bounds.width);        
-        this._h += bounds.height;
+        this._h += bounds.height+30;
 
 
         if ( this._draw == true){
@@ -62,7 +64,7 @@ class DynamicGraphics extends PIXI.Graphics{
         }
 
 
-        this.shift_vertical(bounds.height);
+        this.shift_vertical(bounds.height+30);
 
         return ret;
 
@@ -85,7 +87,7 @@ class DynamicGraphics extends PIXI.Graphics{
 
 
         this._w = Math.max(this._w,bounds.width);        
-        this._h -= bounds.height;
+        this._h -= bounds.height+30;
 
 
         if (this._draw == true){
@@ -96,7 +98,7 @@ class DynamicGraphics extends PIXI.Graphics{
         }
 
 
-        this.shift_vertical(-bounds.height);
+        this.shift_vertical(-bounds.height-30);
 
         return ret;
 
@@ -318,7 +320,7 @@ async function FETCH(app_target, body){
 }
 
 
-function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=40,h2=40,w2=40){
+function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=40,h2=40,w2=40,white = false){
     let label = new PIXI.Text(text,style_param);
     let button = new DynamicGraphics();
     button.set_x(x);
@@ -327,11 +329,17 @@ function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=
     button.set_buttonMode(buttonM);
     button.set_interactive(buttonM);
 
-    if(triangle == true){
+    if(triangle == true && white == false){
         let tri_l = ad_img(["static/Images/tri_r.png",x2,y2,h2,w2]);
         button.addChild(tri_l);
 
         
+    }
+
+    else if(triangle == true && white == true){
+        let tri_l = ad_img(["static/Images/tri_r_w.png",x2,y2,h2,w2]);
+        button.addChild(tri_l);
+
     }
 
 

@@ -23,26 +23,26 @@ function Personalien([x, y, width]) {
   let per_param = ["static/Images/bewerbungsfoto.png", 0, 50, 200, 200];
   let picture = ad_img(per_param);
 
-  let name_ = add_text("Name", 0, picture.y+picture.height + 50, text_style_Pers, false);
+  let name_ = add_text("Name", 0, picture.y+picture.height + 100, {...text_style_Pers, fontWeight:"bold"}, false);
   let name = add_text("David Sanchez", space, name_.y, text_style_Pers, false);
 
-  let birth_ = add_text("Birthdate", 0, name_.y + name_.height + 50, text_style_Pers, false);
-  let birth = add_text("17.05.1995", space, birth_.y, "Verdana", false);
+  let birth_ = add_text("Birthdate", 0, name_.y + name_.height + 50, {...text_style_Pers,fontWeight:"bold"}, false);
+  let birth = add_text("17.05.1995", space, birth_.y, text_style_Pers, false);
 
-  let nation_ = add_text("Nationality", 0, birth_.y + birth_.height + 50, text_style_Pers, false);
+  let nation_ = add_text("Nationality", 0, birth_.y + birth_.height + 50, {...text_style_Pers,fontWeight:"bold"}, false);
   let nation = add_text("Switzerland, Spain", space, nation_.y, text_style_Pers, false);
 
-  let Civi_ = add_text("Civil Status", 0, nation_.y + nation_.height + 50, text_style_Pers, false);
-  let Civi = add_text("Single", space, Civi_.y, text_style_Pers, false);
+  let Civi_ = add_text("Civil Status", 0, nation_.y + nation_.height + 50, {...text_style_Pers,fontWeight:"bold"}, false);
+  let Civi = add_text("in relationship", space, Civi_.y, text_style_Pers, false);
 
-  let Add_ = add_text("Address", 0, Civi_.y + Civi_.height + 50, text_style_Pers, false);
+  let Add_ = add_text("Address", 0, Civi_.y + Civi_.height + 50, {...text_style_Pers,fontWeight:"bold"}, false);
   let Add = add_text("On Inquiry", space, Add_.y, text_style_Pers, false);
 
-  let mobi_ = add_text("Mobile", 0, Add.y + Add.height + 50, text_style_Pers, false);
+  let mobi_ = add_text("Mobile", 0, Add.y + Add.height + 50, {...text_style_Pers,fontWeight:"bold"}, false);
   let mobi = add_text("On Inquiry", space, mobi_.y, text_style_Pers, false);
 
-  let mail_ = add_text("E-Mail", 0, mobi_.y + mobi_.height + 50, text_style_Pers, false);
-  let mail = add_text("davidsanchez062@gmail.com", space, mail_.y, text_style_Pers, false);
+  let mail_ = add_text("E-Mail", 0, mobi_.y + mobi_.height + 50, {...text_style_Pers,fontWeight:"bold"}, false);
+  let mail = add_text("davidsanchez062@gmail.com, write me if you want the uncensored CV", space, mail_.y, text_style_Pers, false);
 
   field.addChild(picture);
   field.addChild(name_);
@@ -63,7 +63,7 @@ function Personalien([x, y, width]) {
   return field;
 }
 
-function Education([x,y,width]){
+function Education([x,y]){
 
     let field = new DynamicGraphics();
     let space = 400;
@@ -75,45 +75,45 @@ function Education([x,y,width]){
     text_style_Edu.fontSize = 20;
 
 
-    let time_uzh = add_text("2022 - 2025",0,50,text_style_Edu,true,true,-20,0,20,20);
-    let uzh = add_text("Bsc Mathematics / Computer Science (120/60)",space,time_uzh.y,text_style_Edu,true);
+    let time_uzh = add_text("2022 - 2025",0,50,{...text_style_Edu,fontWeight:"bold"},true,true,-20,0,20,20);
+    let uzh = add_text("Bsc Mathematics / Computer Science (120/60 ECTS)",space,time_uzh.y,{...text_style_Edu,fontWeight:"bold"},true);
     let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+3,text_style_Edu,true);
     let con_uzh = new DynamicGraphics();
     con_uzh.set_x(space2);
     con_uzh.set_y(uzh2.y+uzh2.height+10);
 
-    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+50,text_style_Edu,true,true,-20,0,20,20);
-    let eth = add_text("Bsc Mathematics",space,time_eth.y,text_style_Edu,true);
+    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+50,{...text_style_Edu,fontWeight:"bold"},true,true,-20,0,20,20);
+    let eth = add_text("Bsc Mathematics",space,time_eth.y,{...text_style_Edu,fontWeight:"bold"},true);
     let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,text_style_Edu,true);   
     let con_eth2 = new DynamicGraphics();
     con_eth2.set_x(space2);
     con_eth2.set_y(eth2.y+eth2.height+10);
 
-    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+50,text_style_Edu,true,true,-20,0,20,20);
-    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,text_style_Edu,true);
+    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+50,{...text_style_Edu,fontWeight:"bold"},true,true,-20,0,20,20);
+    let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,{...text_style_Edu,fontWeight:"bold"},true);
     let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+3,text_style_Edu,true);
     let con_eth = new DynamicGraphics();
     con_eth.set_x(space2);
     con_eth.set_y(eth4.y+eth4.height+10);    
 
 
-    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+50,text_style_Edu,true,true,-20,0,20,20);
-    let pass = add_text("University entrance exam (Gymnasiale Matura)",space,time_pass.y,text_style_Edu,true);
+    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+50,{...text_style_Edu,fontWeight:"bold"},true,true,-20,0,20,20);
+    let pass = add_text("University entrance exam (Passerelle)",space,time_pass.y,{...text_style_Edu,fontWeight:"bold"},true);
     let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+3,text_style_Edu,true);
     let con_pass = new DynamicGraphics();
     con_pass.set_x(space2);
     con_pass.set_y(pass2.y+pass2.height+10);
 
-    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+50,text_style_Edu,true,true,-20,0,20,20);
-    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,text_style_Edu,true);
+    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+50,{...text_style_Edu,fontWeight:"bold"},true,true,-20,0,20,20);
+    let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,{...text_style_Edu,fontWeight:"bold"},true);
     let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+3,text_style_Edu,true);
     let con_bm = new DynamicGraphics();
     con_bm.set_x(50);
     con_bm.set_y(bm2.y+bm2.height+10);
 
 
-    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+50,text_style_Edu,true,true,-20,0,20,20);
-    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,text_style_Edu,true);
+    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+50,{...text_style_Edu,fontWeight:"bold"},true,true,-20,0,20,20);
+    let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,{...text_style_Edu,fontWeight:"bold"},true);
     let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+3,text_style_Edu,true);
     let con_kv = new DynamicGraphics();
     con_kv.set_x(50);
@@ -152,7 +152,7 @@ function Education([x,y,width]){
     time_eth3.on('pointerup',insert_attach_eth);
     eth4.on('pointerup',insert_attach_eth);
 // 
-    let para_pass = ["static/Images/anhange/04/04-1.png", 0, 0, 1300, 1000];
+    let para_pass = ["static/Images/anhange/04/04-1.png", 0, 0, 1000, 700];
 
     let attach_pass = null;
     async function insert_attach_pass (){
@@ -220,29 +220,37 @@ function Education([x,y,width]){
     return field;
 }
 
-function Experience([x,y,width]){
+function Experience([x,y]){
     
     let field = new DynamicGraphics();
     let space = 400;
     let space2 = 100;
+    let space3 = 20;
     field.set_x(x);
     field.set_y(y);
 
     let text_style_exp = { ...text_style, wordWrap: true,wordWrapWidth : 1000 };
     text_style_exp.fontSize=20;
 
-    let time_civi = add_text("01.2020 - 08.2020",0,50,text_style_exp,true,true,-20,0,20,20);
-    let civi = add_text("Civil Service : Dataf management employee",space,time_civi.y,text_style_exp,true);
-    let civi2 = add_text("University of Zurich",space,civi.y+civi.height+3,text_style_exp,true);
-    let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+3,text_style_exp,true);
+    let time_omg = add_text("11.2022 - currently",0,50,{...text_style_exp,fontWeight:"bold"});
+    let omg = add_text("IT Assistant/Support, 30 - 40 %",space,time_omg.y,{...text_style_exp,fontWeight:"bold"});
+    let omg2 = add_text("Omnicommediagroup CH",space,omg.y+omg.height+3,text_style_exp);
+    let omg3 = add_text("first and second level support",space,omg2.y+omg2.height+space3,text_style_exp);
+    let omg4 = add_text("process automation and optimization",space,omg3.y+omg3.height,text_style_exp);
+
+
+    let time_civi = add_text("01.2020 - 08.2020",0,omg4.y+omg4.height+50,{...text_style_exp,fontWeight:"bold"},true,true,-20,0,20,20);
+    let civi = add_text("Civil Service : Data management employee",space,time_civi.y,{...text_style_exp,fontWeight:"bold"},true);
+    let civi2 = add_text("ETH Zurich",space,civi.y+civi.height+3,text_style_exp,true);
+    let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+space3,text_style_exp,true);
     let con_civi = new DynamicGraphics();
     con_civi.set_x(space2);
     con_civi.set_y(civi3.y+civi3.height+10);
 
 
-    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+50,text_style_exp);
-    let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,text_style_exp);
-    let trd2 = add_text("-Self teaching  of the following activities",space,trd.y+trd.height+3,text_style_exp);
+    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+50,{...text_style_exp,fontWeight:"bold"});
+    let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,{...text_style_exp,fontWeight:"bold"});
+    let trd2 = add_text("Self teaching of the following activities",space,trd.y+trd.height+space3,text_style_exp);
     let trd3 = add_text("Data retrieval (Stocks, Futures)",space, trd2.y+trd2.height+3,text_style_exp);
     let trd4 = add_text("Coding software to convert formats of data (python,c++)",space, trd3.y+trd3.height+3,text_style_exp);
     let trd5 = add_text("Researching and developing of trading strategies and risk models (futures, options, stocks)",space, trd4.y+trd4.height+3,text_style_exp);
@@ -250,20 +258,20 @@ function Experience([x,y,width]){
     let trd7 = add_text("Conducting backtests and optimization on Multicharts",space, trd6.y+trd6.height+3,text_style_exp);
 
 
-    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+50,text_style_exp,true,true,-20,0,20,20);
-    let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,text_style_exp,true);
-    let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+3,text_style_exp,true);
+    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+50,{...text_style_exp,fontWeight:"bold"},true,true,-20,0,20,20);
+    let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,{...text_style_exp,fontWeight:"bold"},true);
+    let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+space3,text_style_exp,true);
     let arm3 = add_text("Coordination and planning of platoon (30 people) and reporting to superiors",space,arm2.y+arm2.height+3,text_style_exp,true);
     let arm4 = add_text("Deployment at World Economic Forum 2017",space,arm3.y+arm3.height+3,text_style_exp,true);
     let con_arm = new DynamicGraphics();
     con_arm.set_x(space2);
     con_arm.set_y(arm4.y+arm4.height+10);
 
-    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+50,text_style_exp,true,true,-20,0,20,20);
-    let ass = add_text("Assistant Project Management",space,time_ass.y,text_style_exp,true);
+    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+50,{...text_style_exp,fontWeight:"bold"},true,true,-20,0,20,20);
+    let ass = add_text("Assistant Project Management",space,time_ass.y,{...text_style_exp,fontWeight:"bold"},true);
     let ass1 = add_text("sfb Bildungszentrum Für Technologie and Management in Bergdietikon",space,ass.y+ass.height+3,text_style_exp,true);
-    let ass2 = add_text("-Correcting and improving of website",space,ass1.y+ass1.height+3,text_style_exp,true);
-    let ass3 = add_text("-Data preparation",space,ass2.y+ass2.height+3,text_style_exp,true);
+    let ass2 = add_text("Correcting and improving of website",space,ass1.y+ass1.height+space3,text_style_exp,true);
+    let ass3 = add_text("Data preparation",space,ass2.y+ass2.height+3,text_style_exp,true);
     let ass4 = add_text("Data Analysis",space,ass3.y+ass3.height+3,text_style_exp,true);
     let ass5 = add_text("Support of team",space,ass4.y+ass4.height+3,text_style_exp,true);
     let con_ass = new DynamicGraphics();
@@ -271,13 +279,13 @@ function Experience([x,y,width]){
     con_ass.set_y(ass5.y+ass5.height+10);
 
 
-    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+50,text_style_exp,true,true,-20,0,20,20);
-    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,text_style_exp,true);
+    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+50,{...text_style_exp,fontWeight:"bold"},true,true,-20,0,20,20);
+    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,{...text_style_exp,fontWeight:"bold"},true);
     let app2 = add_text("tesa tape CH AG",space,app.y+app.height+3,text_style_exp,true);
-    let app3 = add_text("-Human Ressources",space,app2.y+app2.height+3,text_style_exp,true);
-    let app4 = add_text("-Sales Department",space,app3.y+app3.height+3,text_style_exp,true);
-    let app5 = add_text("-Purchasing Department",space,app4.y+app4.height+3,text_style_exp,true);
-    let app6 = add_text("-Marketing ",space,app5.y+app5.height+3,text_style_exp,true);
+    let app3 = add_text("Human Ressources",space,app2.y+app2.height+space3,text_style_exp,true);
+    let app4 = add_text("Sales Department",space,app3.y+app3.height+3,text_style_exp,true);
+    let app5 = add_text("Purchasing Department",space,app4.y+app4.height+3,text_style_exp,true);
+    let app6 = add_text("Marketing ",space,app5.y+app5.height+3,text_style_exp,true);
     let app7 = add_text("Accounting",space,app6.y+app6.height+3,text_style_exp,true);
     let app8 = add_text("Product Development",space,app7.y+app7.height+3,text_style_exp,true);
     let con_app = new DynamicGraphics();
@@ -297,9 +305,9 @@ function Experience([x,y,width]){
     civi2.on('pointerup',insert_attach_civi);
     civi3.on('pointerup',insert_attach_civi);
 // 
-    let para_arm = ["static/Images/anhange/07/07-1.png", 0, 0, 1300, 1000];
-    let para_arm2 = ["static/Images/anhange/11/11-1.png", 175, 1010, 1000, 1300];
-    let para_arm3 = ["static/Images/anhange/12/12-1.png", 175, 2320, 1000, 1300];
+    let para_arm = ["static/Images/anhange/07/07-1.png", 0, 0, 1000, 700];
+    let para_arm2 = ["static/Images/anhange/11/11-1.png", 0, 710, 1000, 1300];
+    let para_arm3 = ["static/Images/anhange/12/12-1.png", 0, 2020, 1000, 1300];
 
 
     let attach_arm = null;
@@ -356,7 +364,11 @@ function Experience([x,y,width]){
     app7.on('pointerup',insert_attach_app);
     app8.on('pointerup',insert_attach_app);
 
-
+    field.addChild(time_omg);
+    field.addChild(omg);
+    field.addChild(omg2);
+    field.addChild(omg3);
+    field.addChild(omg4);
 
     field.addChild(time_civi);
     field.addChild(civi);
@@ -444,11 +456,11 @@ function skills([x,y]){
       
     ]
 
-    var data = [{
+    var dataLan = [{
     type: 'table',
     header: {
         values: [["<b>Languages</b>"], ["<b>Level</b>"]],
-        align: "center",
+        align: "left",
         line: {width: 1, color: 'black'},
         fill: {color: "#344b68"},
         font: {family: "Verdana", size: 22, color: "white"}
@@ -478,7 +490,7 @@ function skills([x,y]){
     type: 'table',
     header: {
         values: [["<b>Operating System</b>"],["<b>Usage</b>"], ["<b>basic</b>"],["<b>good</b>"],["<b>advanced</b>"]],
-        align: "center",
+        align: "left",
         line: {width: 1, color: 'black'},
         fill: {color: "#344b68"},
         font: {family: "Verdana", size: 22, color: "white"}
@@ -507,7 +519,7 @@ function skills([x,y]){
     type: 'table',
     header: {
         values: [["<b>Database</b>"],["<b>Usage</b>"], ["<b>basic</b>"],["<b>good</b>"],["<b>advanced</b>"]],
-        align: "center",
+        align: "left",
         line: {width: 1, color: 'black'},
         fill: {color: "#344b68"},
         font: {family: "Verdana", size: 22, color: "white"}
@@ -534,7 +546,7 @@ function skills([x,y]){
     type: 'table',
     header: {
         values: [["<b>Coding Language</b>"],["<b>Usage</b>"], ["<b>basic</b>"],["<b>good</b>"],["<b>advanced</b>"]],
-        align: "center",
+        align: "left",
         line: {width: 1, color: 'black'},
         fill: {color: "#344b68"},
         font: {family: "Verdana", size: 22, color: "white"}
@@ -556,12 +568,12 @@ function skills([x,y]){
       ["x","x","x","",""]
       
     ]
-
+    
     var dataO = [{
     type: 'table',
     header: {
         values: [["<b>Other</b>"],["<b>Usage</b>"], ["<b>basic</b>"],["<b>good</b>"],["<b>advanced</b>"]],
-        align: "center",
+        align: "left",
         line: {width: 1, color: 'black'},
         fill: {color: "#344b68"},
         font: {family: "Verdana", size: 22, color: "white"}
@@ -576,15 +588,15 @@ function skills([x,y]){
     }]
 
     
-    let link = add_text("click here to get to my github!",x,20,{...text_style, fontSize:20},true,true,-15,5,15,15);
+    let link = add_text("click here to get to my github!",x,20,{...text_style, fontSize:20,fill:['#8B0000']},true,true,-15,5,15,15);
     link.on('click', () => {
-        // navigate to Google
-        window.location.href = 'https://github.com/LiquidIce95?tab=repositories';
-      });
+        // navigate to GitHub in a new tab
+        window.open('https://github.com/LiquidIce95?tab=repositories', '_blank');
+    });
 
     var topspace = 30;
 
-    let Lang_table = Plotly.newPlot('skill_table1', data,layoutLan,{displaylogo: false});  
+    let Lang_table = Plotly.newPlot('skill_table1', dataLan,layoutLan,{displaylogo: false});  
     
 
     let Lang_tableH = new HybridPlot("skill_table1",Lang_table);
@@ -624,7 +636,7 @@ function skills([x,y]){
     let O_tableH = new HybridPlot('skill_table_O',O_table);
 
     O_tableH.set_x(x);
-    O_tableH.set_y(PL_tableH.y+130+topspace);
+    O_tableH.set_y(PL_tableH.y+150+topspace);
     // O_tableH.set_w(layoutO["width"]);
 
     Lang_tableH.name = "lantable";
@@ -651,18 +663,22 @@ function skills([x,y]){
 
 }
 
-
+// TODO: donwload button for attachent , in Developemnt hint for projects, back to top
 
 //interactive CV app
 async function show_CV([width,x,y]){
     // here comes complete CV application
-    let field = new DynamicGraphics(x,y,width,350,true);
+    let field = new DynamicGraphics(x,y,width,150,true);
 
     field.name = "CV field";
 
-    var spac = 60;
+    var spac = 50;
 
     var leftspace=75;
+    
+
+    let button_downl = add_text("download attachments",leftspace*16,spac,{...text_style, wordWrap:true,wordWrapWidth:1000,fontSize:20},true,true,-20,5,10,10);
+
 
     let button_pers = add_text("Personal Information",0,0,{...text_style, wordWrap:true,wordWrapWidth:1000},true,true,-30,15,30,30);
     let button_edu = add_text("Education",0,0,{...text_style, wordWrap:true,wordWrapWidth:200},true,true,-30,15,30,30);
@@ -696,12 +712,23 @@ async function show_CV([width,x,y]){
     con_exp.addChild(button_exp);
     con_skills.addChild(button_skills);
 
+    field.addChild(button_downl);
+
     field.addChild(con_pers);
     field.addChild(con_edu);
     field.addChild(con_exp);
     field.addChild(con_skills);
 
     con_skills.shift_vertical(0);
+
+    button_downl.on('pointerup', () => {
+        const pdfLink = document.createElement('a');
+        pdfLink.href = '/static/Images/anhange/attachments.pdf';
+        pdfLink.download = 'file.pdf';
+        pdfLink.click();
+    });
+ 
+
     //Behaviour of labels/button
     let box = null;
     x = 0;
@@ -725,7 +752,7 @@ async function show_CV([width,x,y]){
     button_edu.on('pointerup',button_edu_fo);
 
     let exp_box = null;
-    let param2 = [x,spac,200];
+    let param2 = [x,spac];
 
     async function button_exp_fo() {
         exp_box = await button_handler(exp_box,Experience,param2,con_exp);
