@@ -159,7 +159,7 @@ var spac = 150;
 
 
 let CV_button = add_text("Curriculum Vitae",200,80,text_style,true,true,-55,27,55,55,true);
-let Projects_button = add_text("Projects",CV_button.x+CV_button.width+spac,80,text_style,true,true,-55,27,55,55,true);
+// let Projects_button = add_text("Projects",CV_button.x+CV_button.width+spac,80,text_style,true,true,-55,27,55,55,true);
 
 let CV_container = new DynamicGraphics(200,80);
 // Store the previous height of the container
@@ -211,16 +211,16 @@ async function CVButtonOnPointerUp() {
 
 CV_button.on("pointerup", CVButtonOnPointerUp);
 
-let PJ = null;
-async function ProjectsButtonOnPointerUp() {
-  PJ = await button_handler(PJ,Plot,[],Projects_container);
-  if(rem_hint){
-    app.stage.removeChild(hint);
-  }
+// let PJ = null;
+// async function ProjectsButtonOnPointerUp() {
+//   PJ = await button_handler(PJ,Plot,[],Projects_container);
+//   if(rem_hint){
+//     app.stage.removeChild(hint);
+//   }
     
-}
+// }
 
-Projects_button.on("pointerup", ProjectsButtonOnPointerUp);
+// Projects_button.on("pointerup", ProjectsButtonOnPointerUp);
 
 
 
@@ -228,7 +228,7 @@ Projects_button.on("pointerup", ProjectsButtonOnPointerUp);
 
 //adding all the elements
 
-app.stage.addChild(Projects_button);
+// app.stage.addChild(Projects_button);
 app.stage.addChild(Projects_container);
 app.stage.addChild(CV_button);
 app.stage.addChild(CV_container);
