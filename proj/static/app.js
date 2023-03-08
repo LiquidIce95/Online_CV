@@ -7,11 +7,27 @@ import {
 } from "./Utility.js";
 
 
-const text_style ={
-  fontFamily: 'Verdana',
-  fontSize: 100,
-  fill:['#ffffff']
-};
+function calc_w(x){
+  return window.innerWidth*x;
+}
+function calc_h(x){
+  return window.innerHeight*x;
+}
+
+function get_rat_w(x){
+  return (x/1030);
+}
+function get_rat_h(x){
+  return (x/1800);
+}
+
+function gh(x){
+  return calc_h(get_rat_h(x));
+}
+
+function gw(x){
+  return calc_w(get_rat_w(x));
+}
 
 
 import { show_CV } from "./CV.js";  
@@ -119,11 +135,18 @@ app.renderer.resize(window.innerWidth,window.innerHeight);
 
 document.body.appendChild(app.view);
 
+
+const text_style ={
+  fontFamily: 'Verdana',
+  fontSize: gh(150),
+  fill:['#ffffff']
+};
+
 // create a new Pixi.js container
 const container = new PIXI.Container();
 app.stage.addChild(container);
 
-let up_butt = add_text("to top   ",-300,50,{...text_style, fontSize:40,fontWeight:"bold",fill:['#FFFFFF']},true);
+let up_butt = add_text("to top   ",gw(-300),gh(80),{...text_style, fontSize:gh(80),fontWeight:"bold",fill:['#FFFFFF']},true);
 
 // update the position of the sprite whenever the window is scrolled
 window.addEventListener("scroll", () => {
@@ -154,14 +177,14 @@ let trailTexture = PIXI.Texture.from('static/Images/white_dot.png');
 const rope = Rope_(app,trailTexture);
 
 // Main APP functionalities*************************************************************
-var spac = 150;
+var spac = gw(150);
 
 
 
-let CV_button = add_text("Curriculum Vitae",200,80,text_style,true,true,-55,27,55,55,true);
+let CV_button = add_text("Curriculum Vitae",gw(200),gh(80),text_style,true,true,gw(-25),gh(60),gw(25),gh(50),true);
 // let Projects_button = add_text("Projects",CV_button.x+CV_button.width+spac,80,text_style,true,true,-55,27,55,55,true);
 
-let CV_container = new DynamicGraphics(200,80);
+let CV_container = new DynamicGraphics(gw(200),gh(80));
 // Store the previous height of the container
 let previousHeight = CV_container.height;
 
@@ -188,18 +211,18 @@ app.ticker.add(() => {
   }
 });
 
-let hint = add_text("CLICK ON THE ARROWS TO SHOW CONTENT",spac*3,200,{...text_style, fontSize:40,fontWeight:"bold",fill:['#FF0000']});
+let hint = add_text("CLICK ON THE ARROWS '>' TO SHOW CONTENT",spac,gh(400),{...text_style, fontSize:gh(80),fontWeight:"bold",fill:['#FF0000']},true,true,gw(-25),gh(25),gw(25),gh(50),true);
 app.stage.addChild(hint);
 
 let rem_hint = true;
 
-let Projects_container = new DynamicGraphics(CV_button.x+CV_button.width+spac);
+// let Projects_container = new DynamicGraphics(CV_button.x+CV_button.width+spac);
 
 CV_container.name="cv_container_big";
 
 //defining the behaviour of buttons
 let CV=null;
-let cv_params = [window.innerWidth*0.80,-50,CV_button.height+10]
+let cv_params = [window.innerWidth*0.80,gw(-70),CV_button.height+gh(10)]
 async function CVButtonOnPointerUp() {
   CV = await button_handler(CV,show_CV,cv_params,CV_container);
 
@@ -229,14 +252,20 @@ CV_button.on("pointerup", CVButtonOnPointerUp);
 //adding all the elements
 
 // app.stage.addChild(Projects_button);
-app.stage.addChild(Projects_container);
+// app.stage.addChild(Projects_container);
 app.stage.addChild(CV_button);
 app.stage.addChild(CV_container);
 app.stage.addChild(rope);
 
 
 export {
-  app
+  app,
+  calc_h,
+  calc_w,
+  get_rat_h,
+  get_rat_w,
+  gh,
+  gw
 }
 
 

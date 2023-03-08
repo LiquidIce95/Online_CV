@@ -1,6 +1,6 @@
 // for moving objects that cannot be integrated in pixi.js
 // pxobj are pixi objects and hobj are html objects
-import { app} from "./app.js"
+import { app,gh,gw} from "./app.js"
 
 // TODO : make dynamicgraphics class such that graphics get shifted vertically if a child gets added
 // or removed, then calls shift_vertical on sll paretns and redraw rectangle , st attribute (drawing) to true
@@ -51,7 +51,7 @@ class DynamicGraphics extends PIXI.Graphics{
         
 
         this._w = Math.max(this._w,bounds.width);        
-        this._h += bounds.height+30;
+        this._h += bounds.height+gh(30);
 
 
         if ( this._draw == true){
@@ -64,7 +64,7 @@ class DynamicGraphics extends PIXI.Graphics{
         }
 
 
-        this.shift_vertical(bounds.height+30);
+        this.shift_vertical(bounds.height+gh(30));
 
         return ret;
 
@@ -87,7 +87,7 @@ class DynamicGraphics extends PIXI.Graphics{
 
 
         this._w = Math.max(this._w,bounds.width);        
-        this._h -= bounds.height+30;
+        this._h -= bounds.height+gh(30);
 
 
         if (this._draw == true){
@@ -98,7 +98,7 @@ class DynamicGraphics extends PIXI.Graphics{
         }
 
 
-        this.shift_vertical(-bounds.height-30);
+        this.shift_vertical(-bounds.height-gh(30));
 
         return ret;
 
@@ -320,7 +320,7 @@ async function FETCH(app_target, body){
 }
 
 
-function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=40,h2=40,w2=40,white = false){
+function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=40,w2=40,h2=40,white = false){
     let label = new PIXI.Text(text,style_param);
     let button = new DynamicGraphics();
     button.set_x(x);
@@ -330,14 +330,14 @@ function add_text(text,x,y,style_param,buttonM=false,triangle = false,x2=-40,y2=
     button.set_interactive(buttonM);
 
     if(triangle == true && white == false){
-        let tri_l = ad_img(["static/Images/tri_r.png",x2,y2,h2,w2]);
+        let tri_l = ad_img(["static/Images/tri_r.png",x2,y2,w2,h2]);
         button.addChild(tri_l);
 
         
     }
 
     else if(triangle == true && white == true){
-        let tri_l = ad_img(["static/Images/tri_r_w.png",x2,y2,h2,w2]);
+        let tri_l = ad_img(["static/Images/tri_r_w.png",x2,y2,w2,h2]);
         button.addChild(tri_l);
 
     }
