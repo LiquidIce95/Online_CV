@@ -123,6 +123,25 @@ let clicked = false;
 let video = document.createElement("video");
 
 
+
+const texture = PIXI.Texture.from(video);
+const background = new PIXI.Sprite(texture);
+background.width = window.innerWidth;
+background.height = window.innerHeight;
+
+window.addEventListener("resize", function() {
+  background.width = window.innerWidth;
+  background.height = window.innerHeight;
+});
+
+app.stage.addChild(background);
+
+
+app.renderer.resize(window.innerWidth,window.innerHeight);
+
+
+document.body.appendChild(app.view);
+
 document.addEventListener("click", function() {
   if(clicked == false){
     video.src = "./static/Images/Background_vid.mp4";
@@ -136,24 +155,6 @@ document.addEventListener("click", function() {
   clicked = true;
   
 });
-
-const texture = PIXI.Texture.from(video);
-const background = new PIXI.Sprite(texture);
-background.width = ww();
-background.height = wh();
-
-window.addEventListener("resize", function() {
-  background.width = ww();
-  background.height = wh();
-});
-
-app.stage.addChild(background);
-
-
-app.renderer.resize(ww(),wh());
-
-
-document.body.appendChild(app.view);
 
 
 const text_style ={

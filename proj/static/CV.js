@@ -24,7 +24,7 @@ function Personalien([x, y, width]) {
 
 
 
-  let per_param = ["static/Images/bewerbungsfoto.png", 0, gh(100), gw(250), gh(500)];
+  let per_param = ["static/Images/bewerbungsfoto.png", 0, gh(100), gw(250), gh(700)];
   let picture = ad_img(per_param);
 
   let name_ = add_text("Name", 0, picture.y+picture.height + gh(100), {...text_style_Pers, fontWeight:"bold"}, false);
