@@ -130,7 +130,7 @@ class DynamicGraphics extends PIXI.Graphics{
             PAR.endFill();
         }
 
-        // app.renderer.resize(window.innerWidth,app.renderer.view.height+height);
+        // app.renderer.resize(ww(),app.renderer.view.height+height);
 
     
         for (var i = index; i< list_objects.length;i++){

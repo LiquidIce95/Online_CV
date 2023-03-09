@@ -6,8 +6,10 @@ from "./app.js"
 
 let text_style = {
   fontFamily: "Verdana",
-  fontSize: gh(40),
+  fontSize: Math.max(gh(40),25),
   fill: ["#000000"],
+  wordWrap: true,
+  wordWrapWidth : gw(400)
 };
 
 let space = gw(300);
@@ -18,11 +20,11 @@ function Personalien([x, y, width]) {
   field.set_x(x);
   field.set_y(y);
 
-  let text_style_Pers = { ...text_style, wordWrap: true,wordWrapWidth : width };
+  let text_style_Pers = { ...text_style, wordWrapWidth : width };
 
 
 
-  let per_param = ["static/Images/bewerbungsfoto.png", 0, gh(50), gw(150), gh(500)];
+  let per_param = ["static/Images/bewerbungsfoto.png", 0, gh(100), gw(250), gh(500)];
   let picture = ad_img(per_param);
 
   let name_ = add_text("Name", 0, picture.y+picture.height + gh(100), {...text_style_Pers, fontWeight:"bold"}, false);
@@ -72,24 +74,24 @@ function Education([x,y]){
     field.set_x(x);
     field.set_y(y);
     field.name = "Educaton field";
-    let text_style_Edu = { ...text_style, wordWrap: true,wordWrapWidth : gw(1000) };
+    let text_style_Edu = { ...text_style, wordWrap: true,wordWrapWidth : gw(400) };
 
 
-    let time_uzh = add_text("2022 - 2025",0,gh(50),{...text_style_Edu,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_uzh = add_text("2022 - 2025",0,gh(50),{...text_style_Edu,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let uzh = add_text("Bsc Mathematics / Computer Science (120/60 ECTS)",space,time_uzh.y,{...text_style_Edu,fontWeight:"bold"});
     let uzh2 = add_text("University of Zurich",space,uzh.y+uzh.height+gh(3),text_style_Edu);
     let con_uzh = new DynamicGraphics();
     con_uzh.set_x(space2);
     con_uzh.set_y(uzh2.y+uzh2.height+gh(10));
 
-    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+gh(100),{...text_style_Edu,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_eth = add_text("2021 - 2022",0,uzh2.y+uzh2.height+gh(100),{...text_style_Edu,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let eth = add_text("Bsc Mathematics",space,time_eth.y,{...text_style_Edu,fontWeight:"bold"});
     let eth2 = add_text("ETH Zurich",space,eth.y+eth.height+3,text_style_Edu);   
     let con_eth2 = new DynamicGraphics();
     con_eth2.set_x(space2);
     con_eth2.set_y(eth2.y+eth2.height+gh(10));
 
-    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+gh(100),{...text_style_Edu,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_eth3 = add_text("2020 - 2021",0,eth2.y+eth2.height+gh(100),{...text_style_Edu,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let eth3 = add_text("Bsc Computer Science",space,time_eth3.y,{...text_style_Edu,fontWeight:"bold"});
     let eth4 = add_text("ETH Zurich",space,eth3.y+eth3.height+gh(3),text_style_Edu);
     let con_eth = new DynamicGraphics();
@@ -97,14 +99,14 @@ function Education([x,y]){
     con_eth.set_y(eth4.y+eth4.height+gh(10));    
 
 
-    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+gh(100),{...text_style_Edu,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_pass = add_text("08.2018 - 08.2019",0,eth4.y+eth4.height+gh(100),{...text_style_Edu,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let pass = add_text("University entrance exam (Passerelle)",space,time_pass.y,{...text_style_Edu,fontWeight:"bold"});
     let pass2 = add_text("AME in Aarau",space,pass.y+pass.height+gh(3),text_style_Edu);
     let con_pass = new DynamicGraphics();
     con_pass.set_x(space2);
     con_pass.set_y(pass2.y+pass2.height+gh(10));
 
-    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+gh(100),{...text_style_Edu,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_bm = add_text("08.2017 - 08.2018",0,pass2.y+pass2.height+gh(100),{...text_style_Edu,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let bm = add_text("Higher education entrance exam (Berufsmatura)",space,time_bm.y,{...text_style_Edu,fontWeight:"bold"});
     let bm2 = add_text("KV Reinach in Lenzburg",space,bm.y+bm.height+gh(3),text_style_Edu);
     let con_bm = new DynamicGraphics();
@@ -112,14 +114,14 @@ function Education([x,y]){
     con_bm.set_y(bm2.y+bm2.height+gh(10));
 
 
-    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+gh(100),{...text_style_Edu,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_kv = add_text("08.2012 - 08.2015",0,bm2.y+bm2.height+gh(100),{...text_style_Edu,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let kv = add_text("Business Apprenticeship E-Profile",space,time_kv.y,{...text_style_Edu,fontWeight:"bold"});
     let kv2 = add_text("tesa tape CH AG in Bergdietikon",space,kv.y+kv.height+gh(3),text_style_Edu);
     let con_kv = new DynamicGraphics();
     con_kv.set_x(space2);
     con_kv.set_y(kv2.y+kv2.height+gh(10));
 
-    let parms = ["static/Images/anhange/00/00.png", 0, 0, gw(600), gh(700)];
+    let parms = ["static/Images/anhange/00/00.png", 0, 0, gw(600), gh(400)];
 
     let pico = null;
     async function insert_attach_uzh (){
@@ -216,16 +218,16 @@ function Experience([x,y]){
     field.set_x(x);
     field.set_y(y);
 
-    let text_style_exp = { ...text_style, wordWrap: true,wordWrapWidth : gw(1000) };
+    let text_style_exp = { ...text_style,wordWrapWidth : gw(400) };
 
-    let time_omg = add_text("11.2022 - currently",0,gh(100),{...text_style_exp,fontWeight:"bold"});
+    let time_omg = add_text("11.2022 - currently",0,gh(100),{...text_style_exp,fontWeight:"bold",wordWrapWidth:gw(40)});
     let omg = add_text("IT Assistant/Support, 30 - 40 %",space,time_omg.y,{...text_style_exp,fontWeight:"bold"});
     let omg2 = add_text("Omnicommediagroup CH",space,omg.y+omg.height+gh(3),text_style_exp);
     let omg3 = add_text("first and second level support",space,omg2.y+omg2.height+space3,text_style_exp);
     let omg4 = add_text("process automation and optimization",space,omg3.y+omg3.height,text_style_exp);
 
 
-    let time_civi = add_text("01.2020 - 08.2020",0,omg4.y+omg4.height+gh(100),{...text_style_exp,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_civi = add_text("01.2020 - 08.2020",0,omg4.y+omg4.height+gh(100),{...text_style_exp,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let civi = add_text("Civil Service : Data management employee",space,time_civi.y,{...text_style_exp,fontWeight:"bold"});
     let civi2 = add_text("ETH Zurich",space,civi.y+civi.height+3,text_style_exp);
     let civi3 = add_text("Updating and maintaining database",space,civi2.y+civi2.height+space3,text_style_exp);
@@ -234,28 +236,28 @@ function Experience([x,y]){
     con_civi.set_y(civi3.y+civi3.height+gh(10));
 
 
-    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+gh(100),{...text_style_exp,fontWeight:"bold"});
+    let time_trd = add_text("05.2016 - 08.2020",0,civi3.y+civi3.height+gh(100),{...text_style_exp,fontWeight:"bold",wordWrapWidth:gw(40)});
     let trd = add_text("Algorithmic Trader / independant",space,time_trd.y,{...text_style_exp,fontWeight:"bold"});
     let trd2 = add_text("Self teaching of the following activities",space,trd.y+trd.height+space3,text_style_exp);
     let trd3 = add_text("Data retrieval (Stocks, Futures)",space, trd2.y+trd2.height+gh(3),text_style_exp);
     let trd4 = add_text("Coding software to convert formats of data (python,c++)",space, trd3.y+trd3.height+gh(3),text_style_exp);
-    let trd5 = add_text("Researching and developing of trading strategies and risk models (futures, options, stocks)",space, trd4.y+trd4.height+gh(3),text_style_exp);
+    let trd5 = add_text("Researching and developing of trading strategies ",space, trd4.y+trd4.height+gh(3),text_style_exp);
     let trd6 = add_text("Coding of Tradingstrategies on Multicharts(C#)",space, trd5.y+trd5.height+3,text_style_exp);
     let trd7 = add_text("Conducting backtests and optimization on Multicharts",space, trd6.y+trd6.height+gh(3),text_style_exp);
 
 
-    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+gh(100),{...text_style_exp,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_arm = add_text("11.2015 - 02.2017",0,trd7.y+trd7.height+gh(100),{...text_style_exp,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let arm = add_text("Lietenant Swiss Armed Forces",space,time_arm.y,{...text_style_exp,fontWeight:"bold"});
     let arm2 = add_text("Preparing, commanding , overseeing education of soldiers",space,arm.y+arm.height+space3,text_style_exp);
-    let arm3 = add_text("Coordination and planning of platoon (30 people) and reporting to superiors",space,arm2.y+arm2.height+gh(3),text_style_exp);
+    let arm3 = add_text("Coordination and planning of platoon (30 people)",space,arm2.y+arm2.height+gh(3),text_style_exp);
     let arm4 = add_text("Deployment at World Economic Forum 2017",space,arm3.y+arm3.height+3,text_style_exp);
     let con_arm = new DynamicGraphics();
     con_arm.set_x(space2);
     con_arm.set_y(arm4.y+arm4.height+gh(10));
 
-    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+gh(100),{...text_style_exp,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let time_ass = add_text("08.2015 - 10.2015",0,arm4.y+arm4.height+gh(100),{...text_style_exp,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
     let ass = add_text("Assistant Project Management",space,time_ass.y,{...text_style_exp,fontWeight:"bold"});
-    let ass1 = add_text("sfb Bildungszentrum Für Technologie and Management in Bergdietikon",space,ass.y+ass.height+gh(3),text_style_exp);
+    let ass1 = add_text("sfb Bildungszentrum",space,ass.y+ass.height+gh(3),text_style_exp);
     let ass2 = add_text("Correcting and improving of website",space,ass1.y+ass1.height+space3,text_style_exp);
     let ass3 = add_text("Data preparation",space,ass2.y+ass2.height+gh(3),text_style_exp);
     let ass4 = add_text("Data Analysis",space,ass3.y+ass3.height+gh(3),text_style_exp);
@@ -265,8 +267,8 @@ function Experience([x,y]){
     con_ass.set_y(ass5.y+ass5.height+gh(10));
 
 
-    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+gh(100),{...text_style_exp,fontWeight:"bold"},true,true,gw(-15),gh(8),gw(15),gh(30));
-    let app = add_text("Commercial Employee (Apprenticeship) each Department 6 months",space,time_app.y,{...text_style_exp,fontWeight:"bold"});
+    let time_app = add_text("08.2012 - 08.2015",0,ass5.y+ass5.height+gh(100),{...text_style_exp,fontWeight:"bold",wordWrapWidth:gw(40)},true,true,gw(-15),gh(8),gw(15),gh(30));
+    let app = add_text("Commercial Employee (Apprenticeship)",space,time_app.y,{...text_style_exp,fontWeight:"bold"});
     let app2 = add_text("tesa tape CH AG",space,app.y+app.height+gh(3),text_style_exp);
     let app3 = add_text("Human Ressources",space,app2.y+app2.height+space3,text_style_exp);
     let app4 = add_text("Sales Department",space,app3.y+app3.height+gh(3),text_style_exp);
@@ -389,32 +391,32 @@ function skills([x,y]){
 
     var layoutLan = {
         margin: {l:gw(2), r:gw(2), t:gh(2), b:gh(2)},
-        height: gh(240),
-        width: gw(500)
+        height: 15*gh(30),
+        width: Math.max(gw(500),700)
     };
 
     var layoutOS = {
         margin: {l:gw(2), r:gw(2), t:gh(2), b:gh(2)},
-        height: gh(290),
-        width: gw(500)
+        height: 15*gh(30),
+        width: Math.max(gw(500),700)
     };
 
     var layoutDB = {
         margin: {l:gw(2), r:gw(2), t:gh(2), b:gh(2)},
-        height: gh(140),
-        width: gw(500)
+        height: 11*gh(30),
+        width: Math.max(gw(500),700)
     };
 
     var layoutPL = {
         margin: {l:gw(2), r:gw(2), t:gh(2), b:gh(2)},
-        height:gh(490),
-        width: gw(500)
+        height:22*gh(30),
+        width: Math.max(gw(500),700)
     };
 
     var layoutO = {
         margin: {l:gw(2), r:gw(2), t:gh(2), b:gh(2)},
-        height:gh(420),
-        width: gw(500)
+        height:19*gh(30),
+        width: Math.max(gw(500),700)
     };
 
     var values = [
@@ -430,14 +432,14 @@ function skills([x,y]){
         align: "left",
         line: {width: gw(1), color: 'black'},
         fill: {color: "#344b68"},
-        font: {family: "Verdana", size: gh(40), color: "white"}
+        font: {family: "Verdana", size: gh(30), color: "white"}
     },
     cells: {
         values: values,
         align: "center",
         line: {color: "black", width: gw(1)},
-        font: {family: "Verdana", size: gh(40), color: ["black"]},
-        height: gh(50)
+        font: {family: "Verdana", size: gh(30), color: ["black"]},
+        height: Math.max(gh(50),30)
     }
     }]
     
@@ -460,14 +462,14 @@ function skills([x,y]){
         align: "left",
         line: {width: gw(1), color: 'black'},
         fill: {color: "#344b68"},
-        font: {family: "Verdana", size: gh(40), color: "white"}
+        font: {family: "Verdana", size: gh(30), color: "white"}
     },
     cells: {
         values: valuesOS,
         align: "center",
         line: {color: "black", width: gw(1)},
-        font: {family: "Verdana", size: gh(40), color: ["black"]},
-        height: gh(50)
+        font: {family: "Verdana", size: gh(30), color: ["black"]},
+        height: Math.max(gh(50),30)
     }
     }]
     
@@ -489,14 +491,14 @@ function skills([x,y]){
         align: "left",
         line: {width: gw(1), color: 'black'},
         fill: {color: "#344b68"},
-        font: {family: "Verdana", size: gh(40), color: "white"}
+        font: {family: "Verdana", size: gh(30), color: "white"}
     },
     cells: {
         values: valuesDB,
         align: "center",
         line: {color: "black", width: gw(1)},
-        font: {family: "Verdana", size: gh(40), color: ["black"]},
-        height: gh(50)
+        font: {family: "Verdana", size: gh(30), color: ["black"]},
+        height: Math.max(gh(50),30)
     }
     }]
     
@@ -516,14 +518,14 @@ function skills([x,y]){
         align: "left",
         line: {width: gw(1), color: 'black'},
         fill: {color: "#344b68"},
-        font: {family: "Verdana", size: gh(40), color: "white"}
+        font: {family: "Verdana", size: gh(30), color: "white"}
     },
     cells: {
         values: valuesPL,
         align: "center",
         line: {color: "black", width: gw(1)},
-        font: {family: "Verdana", size: gh(40), color: ["black"]},
-        height: gh(50)
+        font: {family: "Verdana", size: gh(30), color: ["black"]},
+        height: Math.max(gh(50),30)
     }
     }]
 
@@ -543,25 +545,25 @@ function skills([x,y]){
         align: "left",
         line: {width: gw(1), color: 'black'},
         fill: {color: "#344b68"},
-        font: {family: "Verdana", size: gh(40), color: "white"}
+        font: {family: "Verdana", size: gh(30), color: "white"}
     },
     cells: {
         values: valuesO,
         align: "center",
         line: {color: "black", width: gw(1)},
-        font: {family: "Verdana", size: gh(40), color: ["black"]},
-        height: gh(50)
+        font: {family: "Verdana", size: gh(30), color: ["black"]},
+        height: Math.max(gh(50),30)
     }
     }]
 
     
-    let link = add_text("click here to get to my github!",x,gh(20),{...text_style, fontSize:gh(50),fill:['#8B0000']},true,true,gw(-15),gh(5),gh(15),gw(15));
+    let link = add_text("click here to get to my github!",x,gh(150),{...text_style, fontSize:gh(50),fill:['#8B0000']},true);
     link.on('pointerup', () => {
         // navigate to GitHub in a new tab
         window.open('https://github.com/LiquidIce95?tab=repositories', '_blank');
     });
 
-    var topspace = gh(30);
+    var topspace = Math.max(40,gh(60));
 
     let Lang_table = Plotly.newPlot('skill_table1', dataLan,layoutLan,{displaylogo: false});  
     
@@ -625,7 +627,7 @@ function skills([x,y]){
     Con.name="Container for tables";
     Con.set_x(x);
     Con.set_y(y);
-    Con.set_h(gh(2200));
+    Con.set_h(Math.max(gh(2800),1600));
     return Con;
 
 }
@@ -644,10 +646,10 @@ async function show_CV([width,x,y]){
     var leftspace=gw(75);
     
 
-    let button_pers = add_text("Personal Information",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(1000),fontSize:gh(90)},true,true,gw(-15),gh(30),gw(15),gh(30));
-    let button_edu = add_text("Education",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:gh(90)},true,true,gw(-15),gh(30),gw(15),gh(30));
-    let button_exp = add_text("Experience",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:gh(90)},true,true,gw(-15),gh(30),gw(15),gh(30));
-    let button_skills = add_text("Skills",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:gh(90)},true,true,gw(-15),gh(30),gw(15),gh(30));
+    let button_pers = add_text("Personal Information",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:Math.max(gh(80),50)},true,true,gw(-15),gh(30),gw(15),gh(30));
+    let button_edu = add_text("Education",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:Math.max(gh(80),50)},true,true,gw(-15),gh(30),gw(15),gh(30));
+    let button_exp = add_text("Experience",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:Math.max(gh(80),50)},true,true,gw(-15),gh(30),gw(15),gh(30));
+    let button_skills = add_text("Skills",0,0,{...text_style, wordWrap:true,wordWrapWidth:gw(200),fontSize:Math.max(gh(80),50)},true,true,gw(-15),gh(30),gw(15),gh(30));
 
 
     let con_pers = new DynamicGraphics();
@@ -656,7 +658,7 @@ async function show_CV([width,x,y]){
     let con_skills = new Hybrid();
 
 
-    let button_downl = add_text("download attachments",gw(550),spac,{...text_style, wordWrap:true,wordWrapWidth:gw(1000),fontSize:gh(50)},true,true,gw(-20),gh(5),gh(10),gw(10));
+    let button_downl = add_text("click to download attachments",gw(550),spac,{...text_style, wordWrap:true,wordWrapWidth:gw(40),fontSize:gh(50)},true);
 
 
     con_pers.set_x(leftspace);
