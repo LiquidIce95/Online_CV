@@ -167,7 +167,6 @@ const text_style ={
 
 // create a new Pixi.js container
 const container = new PIXI.Container();
-app.stage.addChild(container);
 
 let up_butt = add_text("to top   ",gw(-300),gh(80),{...text_style, fontSize:gh(120),fontWeight:"bold",fill:['#FFFFFF']},true);
 
@@ -187,7 +186,6 @@ up_butt.position.set(
   window.scrollY
 );
 
-container.addChild(up_butt);
 
 
 
@@ -279,6 +277,10 @@ CV_button.on("pointerup", CVButtonOnPointerUp);
 app.stage.addChild(CV_button);
 app.stage.addChild(CV_container);
 app.stage.addChild(rope);
+app.stage.addChild(container);
+
+container.addChild(up_butt);
+
 
 
 export {

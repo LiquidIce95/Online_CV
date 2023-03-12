@@ -212,7 +212,7 @@ class Hybrid extends DynamicGraphics{
 
     shift(){
         this.___updateGlobalCoords();
-        console.log("Object name", this.name);
+        // console.log("Object name", this.name);
         
         if(this.id1!= null){
 
@@ -223,8 +223,8 @@ class Hybrid extends DynamicGraphics{
             var div = document.getElementById(this.id1);
             div.style.position = "absolute";
 
-            div.style.top = `${vals[1]+super.y}px`;
-            div.style.left = `${vals[0]+super.x}px`;
+            div.style.top = `${vals[1]}px`;
+            div.style.left = `${vals[0]}px`;
         }
 
         let list_objects = this.children;
