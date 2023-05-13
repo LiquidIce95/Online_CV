@@ -1,0 +1,4 @@
+npm install jest
+all json and config files
+npm run rest in test dir
+npm install --save-dev jest babel-jest @babel/preset-env 
